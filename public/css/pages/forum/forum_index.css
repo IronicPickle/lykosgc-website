@@ -1,0 +1,415 @@
+/* Route container */
+#route_container {
+  position: relative;
+  height: 20px;
+  margin: 250px 0 0 10%;
+  padding: 0;
+}
+#route_text {
+  position: relative;
+  display: inline;
+  margin: 0;
+  padding: 2px 5px;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(33,33,33,1);
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 0 2px rgba(255,255,255,1);
+  font-weight: 600;
+  border-radius: 5px;
+}
+.route_item:hover {
+  text-decoration: underline;
+}
+/*  Main container */
+#main_container {
+  position: relative;
+  margin: 5px auto 100px auto;
+  padding: 0 0 10px 0;
+  width: 80%;
+  min-width: 600px;
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 0 2px rgba(255,255,255,1);
+  overflow: auto;
+}
+/*  Main title container */
+#main_title_container {
+  position: relative;
+  margin: 10px 10px 0 10px;
+  padding: 0;
+  height: 40px;
+  background-color: rgba(15,24,39,1);
+  border-color: rgba(5,14,29,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#main_title_img {
+  position: absolute;
+  display: inline;
+  margin: 8px;
+  padding: 0;
+  width: 24px;
+}
+#main_title {
+  position: absolute;
+  display: inline;
+  margin: 12px 0 0 43px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  font-weight: 600;
+}
+/* Left wrapper */
+#left_wrapper {
+  position: relative;
+  float: left;
+  margin: 10px 0 0 25px;
+  padding: 0;
+  width: calc(80% - 79px);
+}
+/* Categories container */
+#category_container {
+  position: relative;
+  margin: 0 0 10px 0;
+  padding: 0;
+  height: 40px;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#category_img {
+  position: absolute;
+  display: inline;
+  margin: 3px 0 0 6px;
+  padding: 0;
+  width: 24px;
+}
+#category_spacer {
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  margin: 0 0 0 37px;
+  padding: 0;
+  background-color: rgba(200,200,200,1);
+}
+#category_title {
+  position: absolute;
+  margin: 7px 0 0 50px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+}
+#add_category_img {
+  position: absolute;
+  right: 0;
+  margin: 11px;
+  padding: 0;
+  width: 20px;
+  cursor: pointer;
+}
+#add_category_img_tooltip {
+  right: -90px;
+  margin: 11px;
+}
+/* Sub-forum container */
+#sub-forum_container {
+  position: relative;
+  margin: 0 25px 10px 25px;
+  padding: 0;
+  height: 30px;
+  background-color: rgba(58,70,76,1);
+  border-color: rgba(58,70,76,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#sub_forum_img {
+  position: absolute;
+  display: inline;
+  margin: 3px 0 0 6px;
+  padding: 0;
+  width: 24px;
+}
+#sub-forum_title {
+  position: absolute;
+  margin: 7px 0 0 50px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+}
+#sub-forum_posts {
+  position: absolute;
+  right: 0;
+  margin: 7px 25px 0 0;
+  padding: 0 0 0 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+}
+#sub-forum_replies {
+  position: absolute;
+  right: 0;
+  margin: 7px 100px 0 0;
+  padding: 0 0 0 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+}
+/* Right wrapper */
+#right_wrapper {
+  position: relative;
+  float: right;
+  margin: 10px 25px 0 0;
+  padding: 0;
+  width: calc(20%);
+}
+/* New members container */
+#new_members_container {
+  position: relative;
+  margin: 0;
+  padding: 0 0 5px 0;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#new_members_title {
+  position: relative;
+  margin: 10px;
+  padding: 0 0 5px 0;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: rgba(255,255,255,1);
+  font-family: "Arial", sans-serif;
+  font-size: 18px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+}
+#new_members_user_container {
+  position: relative;
+  margin: 0 0 0 10px;
+  padding: 0;
+  height: 50px;
+}
+#new_members_user_img {
+  position: relative;
+  float: left;
+  margin: 5px;
+  padding: 0;
+  width: 40px;
+}
+#new_members_user_text {
+  position: relative;
+  float: left;
+  margin: 7px 0 0 0;
+  padding: 0;
+  height: 40px;
+  width: calc(100% - 60px);
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#new_members_username {
+  font-weight: 600;
+}
+#new_members_date {
+  color: rgba(103,134,181,1);
+}
+/* New threads container */
+#new_threads_container {
+  position: relative;
+  margin: 10px 0 0 0;
+  padding: 0 0 5px 0;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#new_threads_title {
+  position: relative;
+  margin: 10px;
+  padding: 0 0 5px 0;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: rgba(255,255,255,1);
+  font-family: "Arial", sans-serif;
+  font-size: 18px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+}
+#new_threads_thread_container {
+  position: relative;
+  margin: 0 0 0 10px;
+  padding: 0;
+  height: 50px;
+}
+#new_threads_user_img {
+  position: relative;
+  float: left;
+  margin: 5px;
+  padding: 0;
+  width: 40px;
+}
+#new_threads_thread_text {
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+  width: calc(100% - 60px);
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#new_threads_thread_username {
+  font-weight: 600;
+}
+#new_threads_thread_title {
+  color: rgba(103,134,181,1);
+  font-weight: 600;
+}
+#new_threads_thread_date {
+  color: rgba(103,134,181,1);
+}
+
+/* --- Modify container --- */
+#modify_container {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 400px;
+  margin: 200px auto 0 auto;
+  padding: 0;
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 0 2px rgba(255,255,255,1);
+  z-index: 2;
+}
+#modify_sub-container {
+  position: fixed;
+  display: none;
+  left: 0;
+  right: 0;
+  width: 380px;
+  margin: 10px auto 0 auto;
+  padding: 0;
+  background-color: rgba(15,24,39,1);
+  border-color: rgba(5,14,29,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+  z-index: 3;
+}
+#modify_title {
+  position: relative;
+  margin: 30px 0 0 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  color: rgba(255,255,255,1);
+  font-weight: 100;
+  text-align: center;
+}
+/* Form */
+#modify_form_title {
+	position: absolute;
+  right: 0;
+  left: 0;
+	width: 180px;
+	height: 20px;
+	margin: 30px auto 0 auto;
+	padding: 2px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(33,33,33,1);
+  border-width: 1px;
+  color: rgba(33,33,33,1);
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  background-color: rgba(255,255,255,1);
+  text-align: center;
+}
+#modify_form_order {
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 60px;
+  height: 20px;
+  margin: 65px auto 0 auto;
+  padding: 2px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(33,33,33,1);
+  border-width: 1px;
+  color: rgba(33,33,33,1);
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  background-color: rgba(255,255,255, 1);
+  text-align: center;
+}
+#modify_form_perm {
+  position: absolute;
+  display: none;
+  right: 0;
+  left: 0;
+	width: 180px;
+	height: 24px;
+	margin: 100px auto 0 auto;
+	padding: 2px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(33,33,33,1);
+  border-width: 1px;
+  color: rgba(33,33,33,1);
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  background-color: rgba(255,255,255, 1);
+  text-align: center;
+}
+/* Modification buttons */
+#modify_confirm {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70px;
+  margin: 0 0 20px 80px;
+}
+#modify_cancel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 70px;
+  margin: 0 80px 20px 0;
+}
+
+/* Options */
+#main_options_container {
+  position: absolute;
+  right: 0;
+  margin: 8px;
+}
+#category_options_container {
+  position: absolute;
+  right: 0;
+  margin: 4px 8px;
+}
+#forum_options_container {
+  position: absolute;
+  right: 0;
+  margin: 4px 180px 0 0;
+}

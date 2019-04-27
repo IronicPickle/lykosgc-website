@@ -1,0 +1,8 @@
+{
+  "main": {
+    "debug": true,
+    "log": true,
+    "logPath": "/logs",
+    "logAppend": true
+  }
+}

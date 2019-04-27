@@ -1,0 +1,171 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/user/user.js"></script>
+<script id="_scriptVars" _userID="<%= locals.userInfo._id %>"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/user/user.css">
+
+<title><%= locals.userInfo.username %></title>
+
+<div id="main_container">
+
+  <div id="title_container">
+    <div id="title_spacer"></div>
+    <div id="title"><%= locals.userInfo.username %></div>
+    <div id="title_info_container">
+      <p id="title_name"><%= locals.userInfo.name %></p>
+      <p id="title_tagLine"><%= locals.userInfo.tagLine %></p>
+    </div>
+    <div id="title_rank_container">
+      <% for(var i = 0; i < locals.userInfo.groups.length; i++) { %>
+        <% for(key in locals.groups) { %>
+          <% if(locals.userInfo.groups[i] == locals.groups[key].name) { %>
+            <p id="title_rank" style="background-color:<%= locals.groups[key].color %>;"><%= locals.groups[key].fullName %></p>
+          <% } %>
+        <% } %>
+      <% } %>
+    </div>
+  </div>
+
+  <div id="user_img_container">
+    <div id="user_img_img_container">
+      <img src="/images/avatars/<%= locals.userInfo._id %>" alt="" id="user_img_img" onerror="$(this).attr('src', '/images/avatars/default_user.png');">
+      <% if(authenticator(locals.user, 5)) { %>
+        <% if(locals.authenticator(locals.user, 75)  || locals.user.username == locals.userInfo.username) { %>
+          <p id="user_img_text" onclick="toggleAvatarChanger(true);">Change Avatar</p>
+        <% } %>
+      <% } %>
+    </div>
+  </div>
+
+  <div id="user_stat_container">
+    <p id="user_stat_text">
+      <b>Statistics:</b>
+      <br>
+      <u>Threads:</u> <%= locals.userStats.threads %>
+      <br>
+      <u>Replies:</u> <%= locals.userStats.replies %>
+      <br><br>
+      <b>Join date:</b>
+      <br>
+      <u id="user_stat_joindate"></u>
+      <script>var date = new Date("<%= locals.userInfo.joinDate %>"); $("#user_stat_joindate").html(date.toLocaleDateString());</script>
+    </p>
+    <div id="user_stat_spacer"></div>
+  </div>
+
+  <div id="activity_container">
+    <div id="activity_select_container">
+      <img src="/images/title/post.png" alt="" id="activity_select_button">
+      <img src="/images/title/replies.png" alt="" id="activity_select_button">
+      <img src="/images/title/info.png" alt="" id="activity_select_button">
+    </div>
+    <div id="activity_spacer_container">
+      <img src="/images/title/arrows_up.png" alt="" id="activity_spacer_img">
+      <div id="activity_spacer"></div>
+    </div>
+    <div id="activity_sub_container">
+    </div>
+    <div id="activity_loading"></div>
+    <div id="activity_title_container" class="user_info_container">
+      <img src="/images/title/info.png" alt="" id="activity_title_img" style="width:20px;margin:5px 9px;">
+      <div id="activity_title_spacer"></div>
+      <p id="activity_title">
+        Information
+      </p>
+    </div>
+    <div id="activity_body_container" class="user_info_container">
+      <p id="activity_body" class="user_info_output">
+        <u>Name</u>: <span id="user_info_name"><%= locals.userInfo.name %></span>
+        <br>
+        <u>Date of birth</u>: <span id="user_info_dobDay"><%= locals.userInfo.dobDay %></span> / <span id="user_info_dobMonth"><%= locals.userInfo.dobMonth %></span> / <span id="user_info_dobYear"><%= locals.userInfo.dobYear %></span>
+        <br>
+        <u>Gender</u>: <span id="user_info_gender"><%= locals.userInfo.gender %></span>
+        <br><br>
+        <u>City</u>: <span id="user_info_city"><%= locals.userInfo.city %></span>
+        <br>
+        <u>Country</u>: <span id="user_info_country"><%= locals.userInfo.country %></span>
+        <br><br>
+        <u>Tag Line</u>: <span id="user_info_tagLine"><%= locals.userInfo.tagLine %></span>
+      </p>
+      <p id="activity_body" class="user_info_input">
+        <u>Name</u>: <input id="name">
+        <br>
+        <u>Date of Birth</u>:
+        <span id="dob_container">
+          <select id="dobDay" name="dobDay">
+      			<option disabled>Day</option>
+      		</select>
+      		<select id="dobMonth" name="dobMonth">
+      			<option disabled>Month</option>
+      			<% var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %>
+      			<% for(month = 0; month < months.length; month++) { %>
+      				<option value="<%= months[month] %>"><%= months[month] %></option>
+      			<% } %>
+      		</select>
+      		<select id="dobYear" name="dobYear">
+      			<option disabled>Year</option>
+      			<% for(year = new Date().getFullYear(); year >= 1900; year--) { %>
+      				<option value="<%= year %>"><%= year %></option>
+      			<% } %>
+      		</select>
+        </span>
+        <br>
+        <u>Gender</u>: <input id="gender">
+        <br><br>
+        <u>City</u>: <input id="city">
+        <br>
+        <u>Country</u>: <input id="country">
+        <br><br>
+        <u>Tag Line</u>: <input id="tagLine">
+      </p>
+      <% if(locals.authenticator(locals.user, 5)) { %>
+        <% if(locals.authenticator(locals.user, 75)  || locals.user.username == locals.userInfo.username) { %>
+            <div id="user_info_options">
+              <img class="options_dropdown_button" src="/images/title/options.png">
+              <ul class="options_dropdown_box">
+                <li class="options_dropdown_item" id="user_info_edit">Edit</li>
+                <li class="options_dropdown_spacer"></li>
+                <a href="/password/change"><li class="options_dropdown_item" id="user_info_password_change">Change Password</li></a>
+              </ul>
+            </div>
+        <% } %>
+      <% } %>
+    </div>
+
+    <div id="activity_title_container" class="user_info_container">
+      <img src="/images/title/pencil.png" alt="" id="activity_title_img" style="width:20px;margin:4px 10px;">
+      <div id="activity_title_spacer"></div>
+      <p id="activity_title">
+        Signature
+      </p>
+    </div>
+    <div id="activity_body_container" class="user_info_container">
+      <div id="activity_body">
+        Not yet implemented
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% if(locals.authenticator(locals.user, 5)) { %>
+  <% if(locals.authenticator(locals.user, 75)  || locals.user.username == locals.userInfo.username) { %>
+    <div id="avatar_upload_container">
+      <div id="avatar_upload_sub_container">
+        <p id="avatar_upload_title">Edit Avatar</p>
+        <div id="avatar_preview"></div>
+        <input id="avatar_upload_input" type="file" name="avatar_upload" value="test" accept=".png, .jpg, .jpeg, .bmp, .bmp, .tiff, .gif">
+        <label id="avatar_upload_input_label" class="standard_button" for="avatar_upload_input">Upload file</label>
+        <div id="avatar_upload_preview"></div>
+        <p id="avatar_upload_text">Images are best at 360x360 resolution. <span class="tooltip_trigger" style="cursor:default;">?</span> <span id="avatar_upload_tooltip">Images are cropped and/or scaled to atleast 360x360 pixels. For best results, use images at 360x360.</span></p>
+
+        <div id="avatar_upload_submit" class="standard_button">Submit</div>
+      </div>
+    </div>
+  <% } %>
+<% } %>
+
+
+</div>
+
+<% include ../../partials/footer %>

@@ -1,0 +1,31 @@
+[
+  {
+    "_id": "5ac78d2ef2a46d746b455a84",
+	  "name": "member",
+	  "fullName": "Member",
+    "power": 5,
+	  "TsSGID": 9,
+    "color": "rgb(75,81,93)"
+  },{
+    "_id": "5ac78d43f2a46d746b455a85",
+	  "name": "regular",
+	  "fullName": "Regluar",
+    "power": 10,
+	  "TsSGID": 10,
+    "color": "rgb(170,102,204)"
+  },{
+    "_id": "5ac78d56f2a46d746b455a86",
+	  "name": "mod",
+	  "fullName": "Moderator",
+    "power": 70,
+	  "TsSGID": 11,
+    "color": "rgb(63,114,155)"
+  },{
+    "_id": "5ac78d61f2a46d746b455a87",
+    "name": "admin",
+    "fullName": "Administrator",
+    "power": 75,
+    "TsSGID": 6,
+    "color": "rgb(204,0,0)"
+  }
+]

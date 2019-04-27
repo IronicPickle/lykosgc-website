@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+
+<script src="/js/pages/error_page.js"></script>
+<script id="_scriptVars"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/error_page.css">
+
+<title>Lykos - Login</title>
+
+<div id="main_container">
+
+	<div id="error_title_container">
+		<h3 id="error_title">There was an error with the request</h3>
+	</div>
+
+	<img id="error_img" src="/images/error/gear.png">
+
+	<p id="error_info"><%= locals.code %> - <%= locals.name %></p>
+	<p id="error_desc"><%= locals.desc %></p>
+
+	<p id="error_extra">If you believe this error should not have occured, please contact an admin.</p>
+
+	<p id="error_back">Back</p>
+	<img id="back_img" src="/images/error/back.png">
+</div>
+
+<% include ../partials/footer %>

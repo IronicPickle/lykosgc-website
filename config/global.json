@@ -1,0 +1,49 @@
+{
+  "main": {
+    "port": 8080,
+    "debug": true,
+    "log": true,
+    "logPath": "/logs",
+    "logAppend": true
+  },
+  "database": {
+    "details": {
+      "database": "mongodb://localhost/webDB",
+      "secret": "$2y$12$mzvrED9cYiL3GVo.mYkEo.DqGBjCA.QdsHivPUs89KUhDRfDTe.l6"
+    }
+  },
+  "router": {
+    "public": "/public",
+    "views": "/views",
+    "debug": false,
+    "log": true,
+    "logPath": "/logs",
+    "logAppend": true
+  },
+  "keys": {
+    "session": "$2y$12$o/Ev8yeEgfVjucu1foEIG.3yB3TwZbwKeE38G9BzSg2p2DUI1LMoW"
+  },
+  "email": {
+    "transporter": {
+      "host": "smtp.gmail.com",
+      "port": 465,
+      "secure": true,
+      "auth": {
+        "user": "LykosGCEmailVerify@gmail.com",
+        "pass": "af9cf045cce5bdd94fc51e9f0bec3928"
+      }
+    },
+    "from": "<lykos_do_noy_reply@lykos.com>",
+    "confirm": {
+      "subject": "Lykos account confirmation",
+      "html": "/config/emails/confirm.html"
+    },
+    "reset": {
+      "subject": "Lykos password reset",
+      "html": "/config/emails/reset.html"
+    }
+  },
+  "other": {
+    "indexMirror": "news_and_annoucements"
+  }
+}

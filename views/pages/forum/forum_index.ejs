@@ -1,0 +1,152 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/forum/forum_index.js"></script>
+<script id="_scriptVars"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/forum/forum_index.css">
+
+<title>Forums - Home</title>
+
+<div id="route_container">
+  <p id="route_text">></p>
+  <a href="/forum">
+    <p id="route_text" class="route_item">Forums</p>
+  </a>
+</div>
+
+<div id="main_container">
+
+  <div id="main_title_container">
+    <img src="/images/title/document.png" id="main_title_img">
+    <p id="main_title">Forums</p>
+    <!-- ? Checks if the user is an admin. -->
+    <% if(locals.authenticator(locals.user, 75)) { %>
+      <div id="main_options_container">
+        <img class="options_dropdown_button" src="/images/title/options.png">
+        <ul class="options_dropdown_box">
+          <li class="options_dropdown_item" _type="category" _action="add">Add Category</li>
+        </ul>
+      </div>
+    <% }; %>
+  </div>
+
+  <div id="left_wrapper">
+    <% for(key1 in locals.categories) { %>
+      <% if(!locals.categories[key1].archived) { %>
+        <div id="category_container">
+          <img src="/images/title/title.png" id="category_img">
+          <div id="category_spacer"></div>
+          <a href="/forum/category/<%= locals.categories[key1].category %>">
+            <p id="category_title"><%= locals.categories[key1].categoryString %></p>
+          </a>
+          <% if(locals.authenticator(locals.user, 75)) { %>
+            <div id="category_options_container">
+              <img class="options_dropdown_button" src="/images/title/options.png" style="margin: 4px 0 0 0;">
+              <ul class="options_dropdown_box">
+                <li class="options_dropdown_item" _type="forum" _action="add" _category="<%= locals.categories[key1].category %>">Add Forum</li>
+                <li class="options_dropdown_item" _type="category" _action="edit" _data="<%= JSON.stringify(locals.categories[key1]) %>">Edit Category</li>
+                <li class="options_dropdown_item" _type="category" _action="archive" _data="<%= JSON.stringify(locals.categories[key1]) %>">Archive Category</li>
+              </ul>
+            </div>
+          <% }; %>
+        </div>
+      <% } else { %>
+        <% if(locals.authenticator(locals.user, 75)) { %>
+          <div id="category_container" style="background-color: rgba(33, 33, 33, 1); border-color: rgba(23, 23, 23, 1);">
+            <img src="/images/title/title.png" id="category_img">
+            <div id="category_spacer"></div>
+            <a href="/forum/category/<%= locals.categories[key1].category %>">
+              <p id="category_title"><i><%= locals.categories[key1].categoryString %></i> <b style="font-size: 14px;">Archived</b></p>
+            </a>
+          </div>
+        <% }; %>
+      <% }; %>
+
+      <% for(key2 in locals.locations) { %>
+          <% if(locals.locations[key2].category == locals.categories[key1].category) { %>
+            <% if(!locals.locations[key2].archived) { %>
+              <div id="sub-forum_container">
+                <img id="sub_forum_img" src="/images/title/title.png">
+                <a href="/forum/sub/<%= locals.locations[key2].location %>">
+                  <p id="sub-forum_title"><%= locals.locations[key2].locationString %></p>
+                </a>
+                <% if(locals.authenticator(locals.user, 75)) { %>
+                  <div id="forum_options_container">
+                    <img class="options_dropdown_button" src="/images/title/options.png">
+                    <ul class="options_dropdown_box">
+                      <li class="options_dropdown_item" _type="forum" _action="edit" _data="<%= JSON.stringify(locals.locations[key2]) %>">Edit Forum</li>
+                      <li class="options_dropdown_item" _type="forum" _action="archive" _data="<%= JSON.stringify(locals.locations[key2]) %>">Archive Forum</li>
+                    </ul>
+                  </div>
+                <% }; %>
+                <p id="sub-forum_posts">Posts: <%= locals.locations[key2].postCount %></p>
+                <p id="sub-forum_replies">Replies: <%= locals.locations[key2].replyCount %></p>
+              </div>
+            <% } else { %>
+            <% if(locals.authenticator(locals.user, 75)) { %>
+              <div id="sub-forum_container" style="background-color: rgba(33, 33, 33, 1); border-color: rgba(23, 23, 23, 1);">
+                <img id="sub_forum_img" src="/images/title/title.png">
+                <a href="/forum/sub/<%= locals.locations[key2].location %>">
+                  <p id="sub-forum_title"><i><%= locals.locations[key2].locationString %></i> <b style="font-size: 14px;">Archived</b></p>
+                </a>
+                <p id="sub-forum_posts">Posts: <%= locals.locations[key2].postCount %></p>
+                <p id="sub-forum_replies">Replies: <%= locals.locations[key2].replyCount %></p>
+              </div>
+            <% } %>
+          <% } %>
+        <% } %>
+      <% } %>
+    <% } %>
+  </div>
+
+  <div id="right_wrapper">
+    <div id="new_members_container">
+      <p id="new_members_title">New Members</p>
+      <% for(var i in locals.newUsers) { %>
+        <div id="new_members_user_container">
+          <a href="/users/<%= locals.newUsers[i].username %>">
+            <img src="/images/avatars/<%= locals.newUsers[i]._id %>" alt="" id="new_members_user_img" onerror="$(this).attr(`src`, `/images/avatars/default_user.png`);">
+          </a>
+          <p id="new_members_user_text">
+            <a id="new_members_username" href="/users/<%= locals.newUsers[i].username %>"><%= locals.newUsers[i].username %></a><br/>
+            <span id="new_members_date"><%= locals.getTimeElapsed(new Date(locals.newUsers[i].joinDate)); %></span>
+          </p>
+        </div>
+      <% } %>
+    </div>
+
+    <div id="new_threads_container">
+      <p id="new_threads_title">Recent Threads</p>
+      <% for(var i in locals.newThreads) { %>
+        <div id="new_threads_thread_container">
+          <a href="/users/<%= locals.newThreads[i].authorInfo.username %>">
+            <img src="/images/avatars/<%= locals.newThreads[i].authorInfo._id %>" alt="" id="new_threads_user_img" onerror="$(this).attr(`src`, `/images/avatars/default_user.png`);">
+          </a>
+          <p id="new_threads_thread_text">
+            <a id="new_threads_thread_username" href="/users/<%= locals.newThreads[i].authorInfo.username %>"><%= locals.newThreads[i].authorInfo.username %></a>
+            posted:<br/>
+            <a id="new_threads_thread_title" href="/forum/<%= locals.newThreads[i]._id %>"><%= locals.newThreads[i].title %></a> <br/>
+            <span id="new_threads_thread_date"><%= locals.getTimeElapsed(new Date(locals.newThreads[i].date)); %></span>
+          </p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div id="modify_container">
+  <div id="modify_sub-container">
+    <p id="modify_title"></p>
+    <input id="modify_form_title" type="text" name="title" placeholder="Title">
+    <input id="modify_form_order" type="number" name="order" placeholder="Order">
+    <select id="modify_form_perm" name="perm" placeholder="Permission">
+      <option disabled>Permission</option>
+      <% for(key in locals.groups) { %>
+        <option value="<%= locals.groups[key].power %>"><%= locals.groups[key].fullName %> - <%= locals.groups[key].power %></option>
+      <% }; %>
+    </select>
+    <div class="standard_button" id="modify_confirm">Confirm</div>
+    <div class="standard_button" id="modify_cancel">Cancel</div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

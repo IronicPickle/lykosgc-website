@@ -1,0 +1,114 @@
+<% include partials/header %>
+
+<script src="/js/index.js"></script>
+<script id="_scriptVars"></script>
+<link rel="stylesheet" type="text/css" href="/css/index.css">
+
+<title>Lykos GC</title>
+
+<div id="main_container">
+
+  <div id="main_title_container">
+    <img src="/images/title/document.png" id="main_title_img">
+    <p id="main_title">Lykos: News and Annoucements</p>
+    <% if(locals.authenticator(locals.user, 75)) { %>
+      <div id="add_thread_options">
+        <img class="options_dropdown_button" src="/images/title/options.png">
+        <ul class="options_dropdown_box">
+          <li class="options_dropdown_item" id="options_dropdown_add_post">Add Post</li>
+        </ul>
+      </div>
+    <% } %>
+  </div>
+
+  <div id="left_wrapper"></div>
+
+  <div id="right_wrapper">
+    <div id="new_members_container">
+      <p id="new_members_title">New Members</p>
+      <% for(var i in locals.newUsers) { %>
+        <div id="new_members_user_container">
+          <a href="/users/<%= locals.newUsers[i].username %>">
+            <img src="/images/avatars/<%= locals.newUsers[i]._id %>" alt="" id="new_members_user_img" onerror="$(this).attr(`src`, `/images/avatars/default_user.png`);">
+          </a>
+          <p id="new_members_user_text">
+            <a id="new_members_username" href="/users/<%= locals.newUsers[i].username %>"><%= locals.newUsers[i].username %></a><br/>
+            <span id="new_members_date"><%= locals.getTimeElapsed(new Date(locals.newUsers[i].joinDate)); %></span>
+          </p>
+        </div>
+      <% } %>
+    </div>
+
+    <div id="new_threads_container">
+      <p id="new_threads_title">Recent Threads</p>
+      <% for(var i in locals.newThreads) { %>
+        <div id="new_threads_thread_container">
+          <a href="/users/<%= locals.newThreads[i].authorInfo.username %>">
+            <img src="/images/avatars/<%= locals.newThreads[i].authorInfo._id %>" alt="" id="new_threads_user_img" onerror="$(this).attr(`src`, `/images/avatars/default_user.png`);">
+          </a>
+          <p id="new_threads_thread_text">
+            <a id="new_threads_thread_username" href="/users/<%= locals.newThreads[i].authorInfo.username %>"><%= locals.newThreads[i].authorInfo.username %></a>
+            posted:<br/>
+            <a id="new_threads_thread_title" href="/forum/<%= locals.newThreads[i]._id %>"><%= locals.newThreads[i].title %></a> <br/>
+            <span id="new_threads_thread_date"><%= locals.getTimeElapsed(new Date(locals.newThreads[i].date)); %></span>
+          </p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div id="page_nav_container">
+    <img id="first" src="/images/page_navigation/first.png" width="24px" height="24px">
+    <img id="prev" src="/images/page_navigation/previous.png" width="24px" height="24px">
+
+    <input id="page_nav_number" type="text" name="page" onclick="this.select()">
+
+    <img id="next" src="/images/page_navigation/next.png" width="24px" height="24px">
+    <img id="final" src="/images/page_navigation/last.png" width="24px" height="24px">
+  </div>
+
+</div>
+
+<div id="delete_container">
+  <div id="delete_sub_container">
+    <img id="delete_img" src="/images/header/alert.png" alt="">
+    <p id="delete_title">Are you sure you want to delete the following:</p>
+    <p id="delete_text"></p>
+    <div class="standard_button" id="delete_yes">Yes</div>
+    <div class="standard_button" id="delete_no">Cancel</div>
+  </div>
+</div>
+
+<div id="add_container">
+  <div id="add_sub_container">
+    <img src="/images/title/post.png" alt="" id="add_img"/>
+    <p id="add_title">Creating a Thread</p>
+    <select name="forum" id="add_forum_select">
+      <option id="add_forum_option" disabled>Forum</option>
+      <% var forums = locals.forums; %>
+      <% for(var i in forums) { %>
+        <% if(locals.authenticator(locals.user, forums[i].perm)) { %>
+          <% if(forums[i].location == locals.locationMirror) { %>
+            <option value="<%= forums[i].location %>" id="add_forum_option" selected><%= forums[i].locationString %></option>
+          <% } else { %>
+            <option value="<%= forums[i].location %>" id="add_forum_option"><%= forums[i].locationString %></option>
+          <% } %>
+        <% } %>
+      <% } %>
+    </select>
+    <input type="text" placeholder="Title" id="add_title_input"/>
+    <textarea name="body" id="add_body_input"></textarea>
+    <script>
+      <% if(locals.authenticator(locals.user, 5)) { %>
+      	CKEDITOR.replace("add_body_input", {
+      		height: "300px",
+          removeButtons: "Scayt,Anchor,Table,About,Indent,Outdent,Styles,Source,Maximize"
+      	});
+      <% }; %>
+    </script>
+    <div id="add_button_submit" class="standard_button">Submit</div>
+    <div id="add_button_cancel" class="standard_button">Cancel</div>
+  </div>
+</div>
+
+<% include partials/footer %>

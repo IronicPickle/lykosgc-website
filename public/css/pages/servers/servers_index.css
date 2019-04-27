@@ -1,0 +1,120 @@
+/* Main container */
+#main_container {
+  position: relative;
+  margin: 250px auto 100px auto;
+  padding: 0 0 10px 0;
+  width: 80%;
+  min-width: 600px;
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 0 2px rgba(255,255,255,1);
+  overflow: auto;
+}
+/* Main title container */
+#main_title_container {
+  position: relative;
+  margin: 10px 10px 0 10px;
+  padding: 0;
+  height: 40px;
+  background-color: rgba(15,24,39,1);
+  border-color: rgba(5,14,29,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#main_title_img {
+  position: absolute;
+  display: inline;
+  margin: 8px;
+  padding: 0;
+  width: 24px;
+}
+#main_title {
+  position: absolute;
+  display: inline;
+  margin: 12px 0 0 43px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  font-weight: 600;
+}
+/* Server status container */
+#server_status_container {
+  position: relative;
+  margin: 10px 20px;
+  padding: 0;
+  width: 320px;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  float: left;
+}
+#server_status_refresh {
+  position: absolute;
+  display: none;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  margin: 5px 5px 0 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+#server_status_title {
+  position: relative;
+  margin: 12px 0 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+#server_status_address {
+  position: relative;
+  margin: 5px 0 5px 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+#server_status_refreshing {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 10px auto 10px auto;
+  padding: 0;
+  animation-name: refreshing;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+
+}
+@keyframes refreshing {
+  0% {transform: rotateZ(0deg);}
+  100% {transform: rotateZ(180deg);}
+}
+#server_status_state {
+  position: relative;
+  display: none;
+  margin: 15px 0 10px 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 15px;
+  text-align: center;
+}
+#server_status_extra {
+  position: relative;
+  margin: 5px 0 10px 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+/* --- Spacers --- */

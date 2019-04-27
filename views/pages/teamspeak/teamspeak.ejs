@@ -1,0 +1,115 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/teamspeak/teamspeak.js"></script>
+<script src="/lib/socket.io-client/dist/socket.io.js"></script>
+<script id="_scriptVars"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/teamspeak/teamspeak.css">
+
+<title>Teamspeak</title>
+
+<div id="main_container">
+  <div id="main_title_container">
+    <img src="/images/title/teamspeak.png" id="main_title_img">
+    <p id="main_title">Lykos Teamspeak</p>
+  </div>
+
+  <div id="left_wrapper">
+    <div id="info_container">
+      <div id="info_title_spacer"></div>
+      <img src="/images/title/teamspeak.png" id="info_title_img">
+      <p id="info_text">
+        <span id="info_text_title">Teamspeak Info:</span><br/><br/>
+        <b>Join now!</b> <br/>
+        <span>
+          We welcome anyone to our Teamspeak. <br/>
+          Just hit the join button on the right to join. <br/><br/>
+          We're a fairly relaxed community and don't ask too much of you. <br/>
+          Though we do ask that you follow our rules, which are listed below. <br/><br/>
+        </span>
+
+        <b>Rules:</b><br/>
+        <span>
+          &nbsp;&nbsp;• No harrassment or racism of any kind, in any form. (chats, VoIP, names, etc.) <br/>
+          &nbsp;&nbsp;• Have respect for others including staff. <br/>
+          &nbsp;&nbsp;• Any malicious activities as listed below are strictly forbidden! <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;- Fraud <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;- Scamming <br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;- Identity Theft (Claiming other user's names) <br/>
+          &nbsp;&nbsp;• No spamming or flooding over chat or VoIP. (This includes soundboards) <br/>
+          &nbsp;&nbsp;• Do not record others without their consent. <br/>
+          &nbsp;&nbsp;• NSFW content should lead by a warning of such. <br/><br/>
+
+          <i>If you expereince any issues, please contact a mod or admin.</i> <br/><br/>
+        </span>
+        <b>Account Sync:</b><br/>
+        <span>
+          We allow users to sync their Forum account with their TeamSpeak account. <br/>
+          This will extend your forum ranks to your TeamSpeak account, granting you the same permissions as relevant. <br/><br/>
+          In order to sync your account, use the button on the right hand side to open the <b>Sync Menu</b>. <br/><br/>
+        </span>
+        <span id="info_text_footer">- Lykos Community</span>
+      </p>
+    </div>
+  </div>
+
+  <div id="right_wrapper">
+    <div id="join_container">
+      <p id="join_title">Join Now</p>
+      <a href="ts3server://lykosgc.uk/?port=9987">
+        <img src="/images/title/teamspeak.png" id="join_button_img">
+      </a>
+      <p id="join_text">Click the Icon!</p>
+    </div>
+
+    <div id="sync_open_container">
+      <p id="sync_open_title">Account Sync</p>
+      <div id="sync_open_text">
+        <% if(locals.authenticator(locals.user, 5)) { %>
+          <b id="sync_open_stage"></b><br/>
+          <div class="standard_button" id="sync_open_button">Open</div>
+          Click 'Open' to open <br/>
+          the Sync Menu!
+        <% } else { %>
+          <b id="sync_open_stage"><a href="/login">Login to Sync</a></b><br/>
+          <br/>You must be logged in <br/>
+          to sync your account.
+        <% } %>
+      </div>
+    </div>
+
+    <div id="struggle_container">
+      <p id="struggle_title">Teamspeak Struggle</p>
+      <div id="struggle_text">
+        <% if(locals.authenticator(locals.user, 5)) { %>
+          <% if(locals.user.syncStage == 3) { %>
+            <b>Click to Play!</b>
+            <a href="/teamspeak/struggle"><div class="standard_button" id="struggle_button">Play</div></a>
+          <% } else { %>
+            <b><a href="/login">Sync to Play</a></b><br/>
+            <br/>You must sync your account <br/>
+            to play TS Struggle.
+          <% } %>
+        <% } else { %>
+          <b><a href="/login">Login to Play</a></b><br/>
+          <br/>You must be logged in <br/>
+          to play TS Struggle.
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sync_container">
+  <div id="sync_sub_container">
+    <p id="sync_title">Sync your Account</p>
+  </div>
+  <div id="sync_sub_container" style="height:400px;">
+    <div id="sync_text">
+      <p id="sync_status"></p>
+      <p id="sync_status_text"></p>
+    </div>
+    <div class="standard_button" id="sync_button"></div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

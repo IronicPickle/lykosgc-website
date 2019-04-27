@@ -1,0 +1,645 @@
+/* ---  Main container --- */
+#main_container {
+  position: relative;
+  margin: 250px auto 100px auto;
+  padding: 0 0 10px 0;
+  width: 80%;
+  min-width: 600px;
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 0 2px rgba(255,255,255,1);
+  overflow: auto;
+}
+/* Main title container */
+#main_title_container {
+  position: relative;
+  margin: 10px 10px 0 10px;
+  padding: 0;
+  height: 40px;
+  background-color: rgba(15,24,39,1);
+  border-color: rgba(5,14,29,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#main_title_img {
+  position: absolute;
+  display: inline;
+  margin: 8px;
+  padding: 0;
+  width: 24px;
+}
+#main_title {
+  position: absolute;
+  display: inline;
+  margin: 12px 0 0 43px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  font-weight: 600;
+}
+#add_thread_options {
+  position: absolute;
+  right: 0;
+  margin: 8px;
+}
+/* Left wrapper */
+#left_wrapper {
+  position: relative;
+  float: left;
+  margin: 10px 0 0 25px;
+  padding: 0;
+  width: calc(80% - 79px);
+}
+/* Feed title container */
+#feed_title_container {
+  position: relative;
+  margin: 0 0 10px 0;
+  padding: 0;
+  height: 30px;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#feed_element_img {
+  position: absolute;
+  display: inline;
+  margin: 3px 0 0 6px;
+  padding: 0;
+  width: 24px;
+}
+#feed_element_spacer {
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  margin: 0 0 0 38px;
+  padding: 0;
+  background-color: rgba(200, 200, 200, 1);
+}
+#feed_element_title {
+  position: absolute;
+  margin: 7px 0 0 50px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+}
+#feed_element_title_input {
+  position: absolute;
+  display: none;
+  width: calc(100% - 110px);
+  height: 16px;
+	margin: 4px 0 0 50px;
+	padding: 2px;
+  border-style: solid;
+  border-color: rgba(15,24,39,1);
+  border-width: 1px;
+  color: rgba(0,0,0,1);
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  background-color: rgba(255,255,255,1);
+}
+#feed_element_status_container {
+  position: absolute;
+  height: 43px;
+  right: 0;
+  margin: 0;
+  padding: 0 0 0 60px;
+}
+#feed_element_pinned_img {
+  position: relative;
+  float: right;
+  margin: 5px 5px 0 0;
+  padding: 0;
+  width: 18px;
+}
+#feed_element_locked_img {
+  position: relative;
+  float: right;
+  margin: 5px 5px 0 0;
+  padding: 0;
+  width: 18px;
+}
+#feed_element_status_tooltip {
+  position: absolute;
+  display: none;
+  left: 0;
+  margin: 9px 0 0 10px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,1);
+}
+/* Feed element */
+#feed_element {
+  position: relative;
+  margin: 0 0 10px 0;
+  padding: 0;
+  min-height: 280px;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#feed_element_meta_container {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 150px;
+  height: 100%;
+  border-color: rgba(200,200,200,1);
+  border-style: solid;
+  border-width: 0 2px 0 0;
+}
+#feed_element_meta_username {
+  position: relative;
+  margin: 10px 0 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+#feed_element_meta_img_frame {
+  position: relative;
+  margin: 10px 0 0 25px;
+  padding: 0;
+  width: 100px;
+  height: 100px;
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  overflow: hidden;
+}
+#feed_element_meta_img {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 100px;
+}
+#feed_element_meta_tagline {
+  position: relative;
+  margin: 10px 0 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  color: rgba(103,134,181,1);
+  text-align: center;
+}
+#feed_element_meta_rank_container {
+  position: relative;
+  margin: 15px auto;
+  padding: 0;
+  text-align: center;
+}
+#feed_element_meta_rank {
+  position: relative;
+  margin: 0 20px 5px 20px;
+  padding: 1px 12px;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: rgba(255,255,255,1);
+}
+#feed_element_body {
+  position: relative;
+  margin: 0 0 70px 175px;
+  padding: 0;
+  width: calc(100% - 200px);
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  word-wrap: break-word;
+}
+#feed_element_edited {
+  position: absolute;
+  bottom: 50px;
+  right: 0;
+  margin: 0 10px 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,1);
+}
+#feed_element_info_container {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 40px;
+  width: calc(100% - 163px);
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+}
+#feed_element_info_date {
+  position: absolute;
+  margin: 3px 0 0 10px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+}
+#feed_element_info_datesince {
+  position: absolute;
+  bottom: 0;
+  margin: 0 0 3px 10px;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(103,134,181,1);
+}
+#feed_element_info_options_container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 8px;
+}
+.cke {
+  position: relative;
+  top: 10px;
+  width: calc(100% - 175px);
+  margin: 0 0 75px 163px;
+  padding: 0;
+  display: none;
+}
+/* Right wrapper */
+#right_wrapper {
+  position: relative;
+  float: right;
+  margin: 10px 25px 0 0;
+  padding: 0;
+  width: calc(20%);
+}
+/* New members container */
+#new_members_container {
+  position: relative;
+  margin: 0;
+  padding: 0 0 5px 0;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#new_members_title {
+  position: relative;
+  margin: 10px;
+  padding: 0 0 5px 0;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: rgba(255,255,255,1);
+  font-family: "Arial", sans-serif;
+  font-size: 18px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+}
+#new_members_user_container {
+  position: relative;
+  margin: 0 0 0 10px;
+  padding: 0;
+  height: 50px;
+}
+#new_members_user_img {
+  position: relative;
+  float: left;
+  margin: 5px;
+  padding: 0;
+  width: 40px;
+}
+#new_members_user_text {
+  position: relative;
+  float: left;
+  margin: 7px 0 0 0;
+  padding: 0;
+  height: 40px;
+  width: calc(100% - 60px);
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#new_members_username {
+  font-weight: 600;
+}
+#new_members_date {
+  color: rgba(103,134,181,1);
+}
+/* New threads container */
+#new_threads_container {
+  position: relative;
+  margin: 10px 0 0 0;
+  padding: 0 0 5px 0;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#new_threads_title {
+  position: relative;
+  margin: 10px;
+  padding: 0 0 5px 0;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: rgba(255,255,255,1);
+  font-family: "Arial", sans-serif;
+  font-size: 18px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+}
+#new_threads_thread_container {
+  position: relative;
+  margin: 0 0 0 10px;
+  padding: 0;
+  height: 50px;
+}
+#new_threads_user_img {
+  position: relative;
+  float: left;
+  margin: 5px;
+  padding: 0;
+  width: 40px;
+}
+#new_threads_thread_text {
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+  width: calc(100% - 60px);
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#new_threads_thread_username {
+  font-weight: 600;
+}
+#new_threads_thread_title {
+  color: rgba(103,134,181,1);
+  font-weight: 600;
+}
+#new_threads_thread_date {
+  color: rgba(103,134,181,1);
+}
+/* Nonefound container */
+#feed_notification_container {
+  position: relative;
+  margin: 10px 273px 0 25px;
+  padding: 0;
+  background-color: rgba(255,255,255, 1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-radius: 5px;
+}
+#feed_notification {
+  position: relative;
+  margin: 0 0 0 15px;
+  padding: 5px 0;
+  font-family: "Calibri", sans-serif;
+  font-size: 16px;
+  color: rgba(20, 20, 20, 1);
+}
+/* Page navigation container */
+#page_nav_container {
+  position: relative;
+  clear: both;
+  margin: 10px 0 0 25px;
+  padding: 0;
+  height: 25px;
+  width: 140px;
+  background-color: rgba(15,24,39,1);
+  border-color: rgba(5,14,29,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+#first {
+  position: absolute;
+  left: 0;
+  margin: 1px;
+  padding: 0;
+}
+#prev {
+  position: absolute;
+  left: 20px;
+  margin: 1px;
+  padding: 0;
+}
+#next {
+  position: absolute;
+  right: 20px;
+  margin: 1px;
+  padding: 0;
+}
+#final {
+  position: absolute;
+  right: 0;
+  margin: 1px;
+  padding: 0;
+}
+/* Page navigation form */
+#page_nav_number {
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 30px;
+  height: 13px;
+  margin: 3px auto 0 auto;
+  padding: 2px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: rgba(255,255,255,1);
+  border-width: 1px;
+  color: rgba(0,0,0,1);
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  background-color: rgba(255,255,255,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  text-align: center;
+}
+
+#delete_container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 30%;
+  width: 300px;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 0 2px rgba(255,255,255,1);
+  z-index: 2;
+}
+#delete_sub_container {
+  position: relative;
+  display: none;
+  left: 0;
+  right: 0;
+  margin: 10px;
+  padding: 0 0 70px 0;
+  background-color: rgba(15,24,39,1);
+  border-color: rgba(5,14,29,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+  z-index: 3;
+}
+#delete_img {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: 5px auto;
+  padding: 0;
+  width: 50px;
+}
+#delete_title {
+  position: relative;
+  margin: 60px 20px 0 20px;
+  padding: 0;
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  color: rgba(255,255,255,1);
+  text-align: center;
+}
+#delete_text {
+  position: relative;
+  margin: 20px 20px 0 20px;
+  padding: 0;
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  color: rgba(255,255,255,1);
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+/* Deletion buttons */
+#delete_yes {
+  position: absolute;
+  left: 0;
+  width: 70px;
+  margin: 25px 0 0 60px;
+}
+#delete_no {
+  position: absolute;
+  right: 0;
+  width: 70px;
+  margin: 25px 60px 0 0;
+}
+
+/* Add post container */
+#add_container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 5%;
+  width: 800px;
+  margin: 50px auto 0 auto;
+  padding: 0;
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 0 2px rgba(255,255,255,1);
+  z-index: 2;
+}
+#add_sub_container {
+  position: relative;
+  display: none;
+  margin: 10px;
+  padding: 0;
+  background-color: rgba(15,24,39,1);
+  border-color: rgba(5,14,29,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+  z-index: 3;
+}
+#add_img {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: 5px auto;
+  padding: 0;
+  width: 50px;
+}
+#add_title {
+  position: relative;
+  margin: 60px 20px 0 20px;
+  padding: 0;
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  color: rgba(255,255,255,1);
+  text-align: center;
+}
+#add_text {
+  position: relative;
+  margin: 10px 20px 0 20px;
+  padding: 0;
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  color: rgba(255,255,255,1);
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+#add_forum_select {
+  position: relative;
+  left: 0;
+	width: 350px;
+  height: 30px;
+	margin: 20px 0 0 25px;
+	padding: 2px;
+  background-color: rgba(255,255,255,1);
+  border-style: solid;
+  border-color: rgba(15,24,39,1);
+  border-width: 1px;
+  color: rgba(0,0,0,1);
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+}
+#add_title_input {
+  position: absolute;
+  right: 0;
+	width: 340px;
+  height: 26px;
+	margin: 20px 25px 0 0;
+  padding: 0 5px;
+  border-style: solid;
+  border-color: rgba(15,24,39,1);
+  border-width: 1px;
+  color: rgba(0,0,0,1);
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  background-color: rgba(255,255,255,1);
+}
+#cke_add_body_input {
+  position: relative;
+  display: block;
+  margin: 10px 25px 0 25px;
+  padding: 0;
+  width: calc(100% - 52px);
+}
+/* Add buttons */
+#add_button_submit {
+  position: relative;
+  left: 0;
+  width: 70px;
+  margin: 30px 0 20px 300px;
+}
+#add_button_cancel {
+  position: absolute;
+  right: 0;
+  width: 70px;
+  margin: -46px 300px 0 0;
+}

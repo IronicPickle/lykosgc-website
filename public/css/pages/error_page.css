@@ -1,0 +1,90 @@
+/*  Main container */
+#main_container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 8% auto 100px auto;
+  width: 380px;
+  height: 470px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 2px rgba(255, 255, 255, 1);
+}
+#error_img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 10px auto 0 auto;
+  width: 200px;
+  opacity: 0.3;
+}
+/*  Main title container */
+#error_title_container {
+  position: relative;
+  height: 40px;
+  margin: 12px 10px 0 10px;
+  padding: 0;
+  background-color: rgba(15,24,39,1);
+  border-color: rgba(5,14,29,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#error_title {
+  position: relative;
+  margin: 10px 0 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 18px;
+  color: rgba(255,255,255,1);
+  font-weight: 100;
+  text-align: center;
+}
+/*  Error info */
+#error_info {
+  position: relative;
+  margin: 50px 0 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  color: rgba(33, 33, 33, 1);
+  text-align: center;
+  font-weight: 600;
+}
+#error_desc {
+  position: relative;
+  margin: 30px 0 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  color: rgba(33, 33, 33, 1);
+  text-align: center;
+}
+#error_extra {
+  position: relative;
+  margin: 100px 0 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  color: rgba(33, 33, 33, 1);
+  text-align: center;
+}
+#error_back {
+  position: relative;
+  margin: 60px 0 0 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  color: rgba(33, 33, 33, 1);
+  text-align: center;
+  font-weight: 600;
+}
+#back_img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto 0 auto;
+  width: 60px;
+  opacity: 1;
+  cursor: pointer;
+  opacity: 0.9
+}

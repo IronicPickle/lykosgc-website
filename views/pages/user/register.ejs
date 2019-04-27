@@ -1,0 +1,55 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/user/register.js"></script>
+<script id="_scriptVars"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/user/register.css">
+
+<title>Register</title>
+
+<div id="main_container">
+	<div id="register_title_container">
+		<h3 id="register_title">Register</h3>
+	</div>
+
+	<div id="spacer"></div>
+
+	<input id="username" class="form_input input" type="text" name="username" placeholder="Username">
+	<p id="username_error" class="error_text"></p>
+	<input id="email" class="form_input input" type="text" name="email" placeholder="Email">
+	<p id="email_error" class="error_text"></p>
+	<input id="password" class="form_input input" type="password" name="password" placeholder="Password">
+	<p id="password_error" class="error_text"></p>
+	<input id="password_confirm" class="form_input input" type="password" name="password_confirm" placeholder="Confirm Password">
+	<p id="password_confirm_error" class="error_text"></p>
+	<div id="spacer"></div>
+
+	<p id="dob_text">Date of Birth</p>
+	<div id="dob_container" class="input">
+		<select id="dob_day" class="form_input input" name="dob_day">
+			<option disabled>Day</option>
+		</select>
+		<select id="dob_month" class="form_input input" name="dob_month">
+			<option disabled>Month</option>
+			<% months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %>
+			<% for(month = 0; month < months.length; month++) { %>
+				<option value="<%= months[month] %>"><%= months[month] %></option>
+			<% } %>
+		</select>
+		<select id="dob_year" class="form_input input" name="dob_year">
+			<option disabled>Year</option>
+			<% for(year = new Date().getFullYear(); year >= 1900; year--) { %>
+				<option value="<%= year %>"><%= year %></option>
+			<% } %>
+		</select>
+	</div>
+	<p id="dob_error" class="error_text"></p>
+
+	<div id="spacer"></div>
+
+	<label id="tnd_container" class="input"><input id="tnd" name="tnd" type="checkbox">I agree to the <a href="/terms"><b>Terms and Conditions</b></a></label>
+	<p id="tnd_error" class="error_text"></p>
+
+	<div class="standard_button" id="submit_button">Register</div>
+</div>
+
+<% include ../../partials/footer %>

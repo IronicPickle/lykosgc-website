@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/jquery-ui/jquery-ui.js"></script>
+    <script src="/lib/velocity/velocity.js"></script>
+    <script src="/lib/velocity/velocity.ui.js"></script>
+    <script src="/lib/ckeditor/ckeditor.js"></script>
+    <script src="/js/partials/header.js"></script>
+    <script id="_csrf" _csrf="<%= locals._csrf %>"></script>
+    <script src="/js/utils.js"></script>
+  	<link rel="stylesheet" type="text/css" href="/css/partials/header.css">
+  </head>
+
+  <body>
+    <div id="page_cover"></div>
+    <div id="body_first"></div>
+  	<div id="top_container">
+
+      <div id="top_contents_container">
+        <a href="/" id="top_title_button">
+          <div id="top_logo_container"></div>
+      		<h1 id="top_title">Lykos GC</h1>
+        </a>
+      </div>
+
+      <div id="nav_bar_container">
+        <ul id="nav_bar">
+          <a href="/">
+            <p id="nav_title" hidden>Lykos GC</p>
+          </a>
+
+          <div id="nav_contents_contianer">
+            <a href="/">
+      	    	<li id="nav_item">Home
+      	    	</li>
+            </a>
+            <div id="nav_dropdown_container"></div>
+          </div>
+
+          <div id="nav_contents_contianer">
+            <a href="/forum">
+      	    	<li id="nav_item">Forum
+      	    	</li>
+            </a>
+            <div id="nav_dropdown_container"></div>
+          </div>
+
+          <div id="nav_contents_contianer">
+            <a href="/teamspeak">
+      	    	<li id="nav_item">Teamspeak
+      	    	</li>
+            </a>
+
+            <div id="nav_dropdown_container">
+              <ul id="nav_dropdown">
+                <a href="ts3server://vps501814.ovh.net?port=9987"><li id="nav_dropdown_item">Connect Now</li></a>
+                <a href="/teamspeak"><li id="nav_dropdown_item">Info</li></a>
+              </ul>
+            </div>
+          </div>
+
+          <div id="nav_contents_contianer">
+            <a href="/servers">
+      	    	<li id="nav_item">Servers
+      	    	</li>
+            </a>
+          </div>
+
+          <% if(locals.authenticator(locals.user, 5)) { %>
+              <a href="/users/logout">
+                <img src="/images/header/logout.png" id="login_button_img">
+              </a>
+              <div id="user_username">
+                <a href="/users/<%= locals.user.username %>"><%= locals.user.username %></a>
+              </div>
+              <a href="/users/<%= locals.user.username %>">
+                <img src="/images/avatars/<%= locals.user._id %>" alt="" id="user_img" onerror="$(this).attr('src', '/images/avatars/default_user.png');">
+              </a>
+          <% } else { %>
+              <a href="/login">
+                <img src="/images/header/login.png" id="login_button_img">
+              </a>
+          <% } %>
+
+        </ul>
+      </div>
+  	</div>
+
+    <div id="notification_container">
+      <p id="notification_text"></p>
+      <div class="loader" id="notification_loader"></div>
+      <img src="/images/header/alert.png" alt="" id="notification_alert_img">
+    </div>

@@ -1,0 +1,103 @@
+<% include ../../partials/header %>
+
+<script type="text/javascript" src="/js/pages/forum/forum_post.js"></script>
+<script id="_scriptVars" _postID="<%= locals.post._id %>"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/forum/forum_post.css">
+
+<title><%= locals.post.title %></title>
+
+<div id="route_container">
+  <p id="route_text">></p>
+  <a href="/forum">
+    <p id="route_text" class="route_item">Forums</p>
+  </a>
+  <p id="route_text">></p>
+  <a href="/forum/category/<%= locals.category.category %>">
+    <p id="route_text" class="route_item"><%= locals.category.categoryString %></p>
+  </a>
+  <p id="route_text">></p>
+  <a href="/forum/sub/<%= locals.location.location %>">
+    <p id="route_text" class="route_item"><%= locals.location.locationString %></p>
+  </a>
+  <p id="route_text">></p>
+  <a href="/forum/<%= locals.post._id %>">
+    <p id="route_text" class="route_item"><%= locals.post.title %></p>
+  </a>
+</div>
+
+<div id="main_container">
+
+  <div id="main_title_container">
+    <img src="/images/title/document.png" id="main_title_img">
+    <p id="main_title">Viewing thread: <u><%= locals.post.title %></u></p>
+  </div>
+
+  <div id="page_nav_container">
+    <img id="first" src="/images/page_navigation/first.png" width="24px" height="24px">
+    <img id="prev" src="/images/page_navigation/previous.png" width="24px" height="24px">
+
+    <input id="page_nav_number" type="text" name="page" onclick="this.select()">
+
+    <img id="next" src="/images/page_navigation/next.png" width="24px" height="24px">
+    <img id="final" src="/images/page_navigation/last.png" width="24px" height="24px">
+  </div>
+
+  <p id="feed_title">Replies:</p>
+  <div id="left_wrapper"></div>
+
+  <div id="page_nav_container">
+    <img id="first" src="/images/page_navigation/first.png" width="24px" height="24px">
+    <img id="prev" src="/images/page_navigation/previous.png" width="24px" height="24px">
+
+    <input id="page_nav_number" type="text" name="page" onclick="this.select()">
+
+    <img id="next" src="/images/page_navigation/next.png" width="24px" height="24px">
+    <img id="final" src="/images/page_navigation/last.png" width="24px" height="24px">
+  </div>
+
+  <p id="add_feed_title">Reply:</p>
+
+  <% if(locals.authenticator(locals.user, 5)) { %>
+    <% if(!locals.post.locked || locals.user.groups.includes("admin")) { %>
+      <div id="add_feed_container">
+        <img src="/images/title/title.png" id="add_feed_img">
+        <div id="add_feed_spacer"></div>
+        <div class="standard_button" id="add_feed_submit_button">Submit</div>
+        <form id="add_feed_form" class="feed_form" action="/forum/replies/add/<%= locals.post._id %>" method="POST">
+          <textarea id="add_feed_form_body" name="body" placeholder="Start typing something here..."></textarea>
+    			<input name="replyNo" value="-1" style="display:none;">
+          <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+        </form>
+      </div>
+    <% } else { %>
+      <div id="feed_notification_container">
+        <p id="feed_notification">This thread has been locked, no further replies are allowed.</p>
+      </div>
+    <% }; %>
+  <% } else { %>
+    <div id="feed_notification_container">
+      <p id="feed_notification">You must <b><a href="/login">login</a></b> in order to reply.</p>
+    </div>
+  <% }; %>
+</div>
+
+<script>
+  <% if(locals.authenticator(locals.user, 5)) { %>
+  	CKEDITOR.replace("add_feed_form_body", {
+  		height: "240px",
+      removeButtons: "Scayt,Anchor,Table,About,Indent,Outdent,Styles,Source,Maximize"
+  	});
+  <% }; %>
+</script>
+
+<div id="delete_container">
+  <div id="delete_sub_container">
+    <img id="delete_img" src="/images/header/alert.png" alt="">
+    <p id="delete_title">Are you sure you want to delete the following:</p>
+    <p id="delete_text"></p>
+    <div class="standard_button" id="delete_yes">Yes</div>
+    <div class="standard_button" id="delete_no">Cancel</div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

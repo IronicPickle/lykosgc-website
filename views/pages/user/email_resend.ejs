@@ -1,0 +1,20 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/user/email_resend.js"></script>
+<script id="_scriptVars" _confirmID="<%= locals.confirmID %>" _csrf="<%= locals._csrf %>"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/user/email_resend.css">
+
+<title>Email Resend</title>
+
+<div id="main_container">
+	<div id="login_title_container">
+		<h3 id="email_title">Your account isn't active yet!</h3>
+	</div>
+	<div id="spacer"></div>
+	<p id="email_text">In order to continue, you must confirm your email using the link in the email we sent you.</p>
+	<div id="spacer"></div>
+	<p id="email_text">If you don't see an email in your inbox, be sure to check your spam folder.<br><br>If you still don't see an email, you can resend it with the button below.</p>
+	<div id="spacer"></div>
+	<div class="standard_button" id="submit_button">Resend Email</div>
+</div>
+<% include ../../partials/footer %>

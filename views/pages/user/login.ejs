@@ -1,0 +1,34 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/user/login.js"></script>
+<script id="_scriptVars"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/user/login.css">
+
+<title>Login</title>
+
+<div id="main_container">
+
+	<div id="login_title_container">
+		<h3 id="login_title">Login</h3>
+	</div>
+
+	<div id="spacer"></div>
+
+	<input id="username" class="form_input input" type="text" name="username" placeholder="Username">
+	<p id="username_error" class="error_text"></p>
+	<input id="password" class="form_input input" type="password" name="password" placeholder="Password">
+	<p id="password_error" class="error_text"></p>
+
+	<label id="remember_container"><input id="remember" name="remember" type="checkbox">Remember me</label>
+
+	<div id="spacer"></div>
+
+	<p id="forgot_text">Forgotten your <a id="forgot_button" href="/password/reset">Password</a>?<p>
+	<div id="spacer"></div>
+
+	<p id="register_text">Not got an account? <a id="register_text_button" href="/register">Register</a></p>
+
+	<div class="standard_button" id="submit_button">Login</div>
+</div>
+
+<% include ../../partials/footer %>

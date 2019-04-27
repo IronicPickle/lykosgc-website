@@ -1,0 +1,433 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/teamspeak/struggle.js"></script>
+<script src="/js/pages/teamspeak/struggle_coin.js"></script>
+<script src="/js/pages/teamspeak/struggle_units.js"></script>
+<script src="/js/pages/teamspeak/struggle_socket.js"></script>
+<script src="/lib/struggle/coin_rng.js"></script>
+<script src="/lib/socket.io-client/dist/socket.io.js"></script>
+<script type="text/javascript" src="/lib/jquery.path-master/jquery.path.js"></script>
+<script id="_scriptVars"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/teamspeak/struggle.css">
+<meta name="viewport" content="user-scalable=0">
+
+<title>TS Struggle</title>
+
+<div class="raid_timer_container" id="incomming_raid_container">
+  <p class="raid_timer_text" id="incomming_raid_text"></p>
+</div>
+
+<div class="raid_timer_container" id="grace_period_container">
+  <p class="raid_timer_text" id="grace_period_text"></p>
+</div>
+
+<div class="raid_timer_container" id="outgoing_raid_container">
+  <p class="raid_timer_text" id="outgoing_raid_text"></p>
+</div>
+
+<div class="side_buttons" id="raid_all_button">
+  <p class="side_buttons_text">View Raids</p>
+</div>
+
+<div class="side_buttons" id="toggle_animations_button">
+  <p class="side_buttons_text" id="toggle_animations_text">Disable Animations</p>
+</div>
+
+<audio id="click_sound" src="/audio/struggle/trigger.ogg" controls preload="none" hidden></audio>
+
+<div id="main_container">
+  <div id="village_container">
+    <div id="village_title_container">
+      <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_light" style="left:0;">i</p>
+      <div class="struggle_tooltip_container" style="left:0;">
+        <p class="struggle_tooltip_text">
+          <span class="struggle_tooltip_title">Village Help:</span><br/><br/>
+          The list below displays all available villages owned by other players. <br/><br/>
+          <b>Controls:</b> <br/>
+          <b>LMB Village</b> - Raids that village. <br/><br/>
+          <b>Raiding</b> <br/>
+          Raiding can be complicated, but it's important you understand it. <br/>
+          During a raid, the defender's full roster will be used, while only the units you sent will be used. <br/>
+          Additionally, defenders are notified when a raid is incomming, along with a timer displaying how long they have left. <br/>
+          This makes it important to consider travel time, which is calculated using the movement speed of your army. This is displayed at the top right of your offensive layout. <br/><br/>
+          <b>Requirements</b> <br/>
+          The following conditions must be met in order to raid: <br/>
+          - You must have at least one unit in your offense layout. <br/>
+          - You must have at least one unit assigned that is in your offense layout. <br/>
+          - You must not be in a grace period. <br/>
+          - The target must not be in a grace period. <br/>
+          Notifications will be shown if the requirements are not met. <br/><br/>
+          <b>Attack Patterns: </b> <br/>
+          The attack pattern of a raid is also important, as it can play a huge role in how you structure your army. <br/>
+          It's too complicated to word attack patterns, so if you would like to understand them, <a href="/teamspeak/struggle/help?img=attack_pattern" target="_blank"><b><u>click here.</u></b></a> <br/><br/>
+          <b>Why raid?</b> <br/>
+          If the defender is defeated, during a raid, half of their current workers will be stolen and given to you. <br/>
+          This can prove very beneficial in the late game when workers begin to cost a lot. <br/>
+          In order to not demoralise the victim too hard, and to make sure they can regain their footing, a grace period will be granted to a defeated village. <br/>
+          This grace period is calculated based of the victim's net worth. As a result, rich villages will be granted with shorter grace periods than poor villages.
+        </p>
+      </div>
+      <p id="village_title"></p>
+      <p id="details_input_toggle_text">Edit</p>
+      <p id="clear_grace_text">Clear<br/>Grace Period</p>
+    </div>
+  </div>
+  <div id="manage_container">
+    <div id="manage_title_container">
+      <p id="manage_title">Your Units</p>
+    </div>
+    <div id="manage_units_container">
+      <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_dark" style="left:0;">i</p>
+      <div class="struggle_tooltip_container" style="left:0;">
+        <p class="struggle_tooltip_text">
+          <span class="struggle_tooltip_title">Units Help:</span><br/><br/>
+          Below are all the units you have available. <br/>
+          Units that are currently on a raid will display as unavailable. <br/><br/>
+          <b>Controls:</b> <br/>
+          <b>LMB Unit Icon</b> - Adds the unit from your offense or defence layout. <br/>
+          <b>LMB Plus</b> - Assigns a unit. <br/>
+          <b>LMB Minus</b> - Unassigns a unit. <br/>
+          <b>Shift + LMB Plus</b> - Assigns every unit. <br/>
+          <b>Shift + LMB Minus</b> - Unassigns every unit. <br/><br/>
+          Note: Only assigned units will be used when raiding, but all units will be used when defending.
+        </p>
+      </div>
+      <p id="manage_units_title">Select Units</p>
+      <div id="manage_units_grid_container">
+      </div>
+    </div>
+    <div id="manage_layout_container">
+      <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_dark" style="top:40px;left:0;">i</p>
+      <div class="struggle_tooltip_container" style="top:40px;left:0;">
+        <p class="struggle_tooltip_text">
+          <span class="struggle_tooltip_title">Layout Help:</span><br/><br/>
+          This is your unit layout. It displays the formation your units will take while in battle. <br/>
+          Units attack in an alternating pattern starting from slot 1 and ending at slot 4.<br/>
+          For a full visualisation, <a href="/teamspeak/struggle/help?img=attack_pattern" target="_blank"><b><u>click here</u></b></a>. <br/>
+          <br/>
+          You have a defence layout and offense layout. <br/>
+          Defence Layout - used when defending against a raid. <br/>
+          Offense Layout - used when raiding another village. <br/>
+          <br/>
+          <b>Controls:</b> <br/>
+          <b>LMB Toggle</b> - Toggles between your defence and offense layout. <br/>
+          <b>LMB Clear</b> - Clears the currently selected layout. <br/>
+          <b>LMB Unit Icon</b> - Displays fully calculated stats about that unit. <br/>
+        </p>
+      </div>
+      <p id="manage_layout_title"></p>
+      <p id="manage_layout_luck_boost"></p>
+      <p id="manage_layout_raid_speed"></p>
+      <p id="manage_layout_toggle_button">Toggle</p>
+      <p id="manage_layout_clear_button">Clear</p>
+      <div id="manage_layout_grid_container">
+        <% for(var i = 0; i < 4; i++) { %>
+          <p id="manage_layout_name"></p>
+        <% } for(var i = 0; i < 4; i++) { %>
+          <img src="" alt="" id="manage_layout_img"/>
+        <% } %>
+      </div>
+    </div>
+    <div id="manage_stats_container">
+      <p id="manage_stats_title">Stats</p>
+      <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_dark" style="left:0;">i</p>
+      <div class="struggle_tooltip_container" style="left:0;">
+        <p class="struggle_tooltip_text">
+          <span class="struggle_tooltip_title">Unit Stats Help</span><br/><br/>
+          This box will display a unit's stats when selected via your unit layout. <br/>
+          It will calculate a unit's stats as if it were in battle. <br/><br/>
+          <b>Calculation:</b> <br/>
+          - Stats are calculated using boosts from other characters. <br/>
+          - Units selected from your offense lineup will calculate using only the assigned units. <br/>
+          - Units selected from your defence lineup will calculate using all units of that type. <br/>
+      </div>
+      <object data="" type="" id="manage_stats_img"></object>
+      <p id="manage_stats_text">
+        <br/><b id="manage_stats_name"></b><br/>
+        <span id="manage_stats_assigned"></span><br/>
+        Unavailable: <span id="manage_stats_unavailable"></span><br/><br/>
+        <b>Health: </b><span id="manage_stats_health"></span><br/>
+        <i>&nbsp;Boosted by: <span id="manage_stats_healthBuff"></span>%</i><br/>
+        <b>Damage: </b><span id="manage_stats_damage"></span><br/>
+        <i>&nbsp;Boosted by: <span id="manage_stats_damageBuff"></span>%</i><br/>
+        <b>Movement Speed: </b><span id="manage_stats_moveSpeed"></span><br/>
+        <i>&nbsp;Boosted by: <span id="manage_stats_moveSpeedBuff"></span>%</i><br/>
+        <b>Attack Range: </b><span id="manage_stats_attackRange"></span><br/>
+      </p>
+    </div>
+  </div>
+
+  <div id="click_container">
+    <div id="click_title_container">
+      <p id="click_title">Current coins</p>
+    </div>
+    <div id="click_money_container">
+      <div id="click_money_count_container">
+        <object id="click_money_coin" data="/images/struggle/gold_coin.svg" type="image/svg+xml"></object>
+        <p id="click_money_count" class="gold"></p>
+        <object id="click_money_coin" data="/images/struggle/silver_coin.svg" type="image/svg+xml"></object>
+        <p id="click_money_count" class="silver"></p>
+        <object id="click_money_coin" data="/images/struggle/bronze_coin.svg" type="image/svg+xml"></object>
+        <p id="click_money_count" class="bronze"></p>
+        <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_light" style="top:3px;left:0;">i</p>
+        <div class="struggle_tooltip_container" style="left:0;">
+          <p class="struggle_tooltip_text">
+            <span class="struggle_tooltip_title">Coin Help:</span><br/><br/>
+            This is your financial management area. <br/>
+            It displays your current coins, Coins per Second (CPS) and the coin itself used to generate coins. <br/><br/>
+            TL:DR - Click the coin to generate coins; the faster the coin spins, the more coins you get; coin drops are RNG; CPS = coins per second and more coins from clicks; CPS are generated offline. <br/><br/>
+            <b>Controls:</b> <br/>
+            <b>LMB Giant Coin</b> - Produces coins on each click. <br/><br/>
+            Coin generation is simple at the start, but it gets a little more complicated the further you progress. <br/>
+            Clicking the giant coin will generate a coin every click, the higher RPM you obtain, the more coins you will earn. If you're lucky, you will gain extra coins. See below for these values. <br/><br/>
+            CPS (Coins per Second) is the only other way to gain coins other than clicking. <br/>
+            CPS is gained by purchasing workers, each of which have their own costs and CPS values. <br/>
+            CPS is exactly what is says on the tin, it's the number of coins you will gain passively, every second. <br/><br/>
+            Note: Coins are gained even with the game closed, so you don't need to leave your browser open. <br/><br/>
+            <b>Warning! Mathy Stuff Below!</b> <br/>
+            --- --- --- --- --- --- --- --- --- --- ---<br/>
+            <b>Coin Chances:</b><br/>
+            <b>Common: 1 bronze coin ~ 90.9% chance</b><br/>
+            <b>Uncommon: 5 bronze coins ~ 9.1% chance</b><br/>
+            <b>Rare: 1 silver coin ~ 0.9% chance</b><br/>
+            <b>Very Rare: 5 silver coins ~ 0.1% chance</b><br/><br/>
+            Once you purchase workers, your clicks will generate more coins, in addition to RPM. <br/>
+            This is calculated by multiplying the coins from the click by your total CPS. <br/>
+            <b>Coins Gained = Coins From Click * CPS * RPM Coin Multiplier</b> <br/><br/>
+            Despite this, you will always at least 1 coin. This means that your clicks will only be affected once you have at least 2 CPS. <br/>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="click_coin_trigger"></div>
+    <div id="click_coin_container">
+      <object id="click_coin_background" data="/images/struggle/gold_coin.svg" type="image/svg+xml"></object>
+      <object id="click_coin" data="/images/struggle/gold_coin.svg" type="image/svg+xml"></object>
+    </div>
+    <div id="click_toggle_button"></div>
+    <p id="click_coin_notes"></p>
+    <div id="click_cps_container">
+      <p id="click_cps_text"></p>
+    </div>
+  </div>
+  <div id="units_container">
+    <div id="units_title_container">
+      <p id="units_title">Unit Management</p>
+      <p id="units_toggle">Expand</p>
+    </div>
+    <div id="worker_title_container">
+      <p id="worker_title">Workers</p>
+      <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_light" style="left:0;">i</p>
+      <div class="struggle_tooltip_container" style="left:0;">
+        <p class="struggle_tooltip_text">
+          <span class="struggle_tooltip_title">Worker Help:</span><br/><br/>
+          Workers are vital to your progression and as they make generating coins a whole lot easier. <br/>
+          Each worker will grant you with CPS (Coins per Second). <br/>
+          CPS does what is says on the tin, in addition to increasing the coins earned from clicks. See the Coin Help for more info. <br/><br/>
+          <b>Controls:</b> <br/>
+          <b>LMB Buy</b> - Purchases that worker. <br/>
+          <b>Shift + LMB Buy</b> - Purchases 10 of that worker. <br/>
+          <b>Shift + Alt + LMB Buy</b> - Purchases 100 of that worker. <br/><br/>
+          <b>Worker Cost:</b> <br/>
+          Workers have a fairly complicated cost algorithm, and you're more than welcome to ignore it and just play. <br/>
+          But the one thing you should know is that workers will increase in price each time you purchase them. <br/>
+          This only gets worse the more workers you already have, as their cost increases exponentially, by 10% each time. <br/>
+          <b>Worker Cost = Previous Cost * 1.1</b>
+        </p>
+      </div>
+    </div>
+    <div id="worker_container">
+      <% for(var i in locals.units) { %>
+        <% if(locals.units[i].type == "worker") { %>
+          <div id="units_info_container">
+            <object data="/images/struggle/workers/<%= i %>.svg" type="image/svg+xml" id="units_img"></object>
+            <span id="units_text">
+              <span id="units_name"><%= locals.units[i].name %></span>
+              <br/>
+              Current: <span class="current_<%= i %>" id="units">0</span>
+              <br/>
+              CPS: <span class="cps_<%= i %>" id="cps"></span>
+            </span>
+          </div>
+          <div id="units_buy_container" class="units_buy_<%= i %>">
+            <span id="units_buy_title">Cost</span>
+            <div id="units_buy_cost_container">
+              <object data="/images/struggle/bronze_coin.svg" type="image/svg+xml" id="units_buy_coin"></object>
+              <span id="units_buy_cost" class="units_buy_bronze tooltip_bronze_<%= i %>"></span>
+              <object data="/images/struggle/silver_coin.svg" type="image/svg+xml" id="units_buy_coin"></object>
+              <span id="units_buy_cost" class="units_buy_silver tooltip_silver_<%= i %>"></span>
+              <object data="/images/struggle/gold_coin.svg" type="image/svg+xml" id="units_buy_coin"></object>
+              <span id="units_buy_cost" class="units_buy_gold tooltip_gold_<%= i %>"></span>
+            </div>
+            <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_dark" style="right:0;">i</p>
+            <div class="struggle_tooltip_container" style="right:0;">
+              <p class="struggle_tooltip_text">
+                <span class="struggle_tooltip_title">Stats - <%= locals.units[i].name %>:</span>
+                <br/><br/>
+                Coins per Second: <%= locals.units[i].cps %>
+                <br/><br/>
+                <span id="units_tooltip_cost">Cost: </span>
+                <object data="/images/struggle/bronze_coin.svg" type="image/svg+xml" id="units_tooltip_coin"></object>
+                <span id="units_tooltip_cost" class="units_buy_bronze tooltip_bronze_<%= i %>"></span>
+                <object data="/images/struggle/silver_coin.svg" type="image/svg+xml" id="units_tooltip_coin"></object>
+                <span id="units_tooltip_cost" class="units_buy_silver tooltip_silver_<%= i %>"></span>
+                <object data="/images/struggle/gold_coin.svg" type="image/svg+xml" id="units_tooltip_coin"></object>
+                <span id="units_tooltip_cost" class="units_buy_gold tooltip_gold_<%= i %>"></span>
+              </p>
+            </div>
+            <div class="standard_button" id="units_buy_button" unit="<%= i %>">Buy x <span id="units_buy_amount">1</span></div>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+    <div id="soldier_title_container">
+      <p id="soldier_title">Soldiers</p>
+      <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_light" style="left:0;">i</p>
+      <div class="struggle_tooltip_container" style="left:0;">
+        <p class="struggle_tooltip_text">
+          <span class="struggle_tooltip_title">Soldier Help:</span><br/><br/>
+          Soldiers are your bread and butter when it comes to being competitive. <br/>
+          They're used to raid other villages in addition to defending your own. <br/>
+          It is important to strike a balance between workers and soldiers when playing in order to both defend yourself, and progress. <br/><br/>
+          <b>Controls:</b> <br/>
+          <b>LMB Buy</b> - Purchases that soldier. <br/>
+          <b>Shift + LMB Buy</b> - Purchases 10 of that soldier. <br/>
+          <b>Shift + Alt + LMB Buy</b> - Purchases 100 of that soldier. <br/><br/>
+          <b>Worker Cost:</b> <br/>
+          <b>Cost and Stats:</b> <br/>
+          Soldier costs are fully fixed, unlike workers, meaning you can stack them much higher. <br/>
+          Additionally, their stats can stack alongside the boosts they grant to the whole roster. <br/>
+          A soldiers' stats are listed in their help tooltip. (The little circle with an 'i' in the middle like this one.) <br/><br/>
+          Soldiers all have four core stats, they are: Health, Damage, Movement Speed and Attack Range. <br/>
+          Health and damage are self-explanatory, but the other two aren't. <br/>
+          Movement speed is used to calcualte the time it will take an army to reach another village before a raid begins. <br/>
+          Attack range is used during a raid and dictates what enemy soldier the soldier will attack based on the position of both. <br/><br/>
+        </p>
+      </div>
+    </div>
+    <div id="soldier_container">
+      <% for(var i in locals.units) { %>
+        <% if(locals.units[i].type == "soldier") { %>
+          <div id="units_info_container">
+            <object data="/images/struggle/soldiers/<%= i %>.svg" type="image/svg+xml" id="units_img"></object>
+            <span id="units_text">
+              <span id="units_name"><%= locals.units[i].name %></span>
+              <br/>
+              Current: <span class="current_<%= i %>" id="units">0</span>
+              <br/>
+              Role: <span class="role_<%= i %>" id="role"></span>
+            </span>
+          </div>
+          <div id="units_buy_container" class="units_buy_<%= i %>">
+            <span id="units_buy_title">Cost</span>
+            <div id="units_buy_cost_container">
+              <object data="/images/struggle/bronze_coin.svg" type="image/svg+xml" id="units_buy_coin"></object>
+              <span id="units_buy_cost" class="units_buy_bronze buy_bronze_<%= i %>"></span>
+              <object data="/images/struggle/silver_coin.svg" type="image/svg+xml" id="units_buy_coin"></object>
+              <span id="units_buy_cost" class="units_buy_silver buy_silver_<%= i %>"></span>
+              <object data="/images/struggle/gold_coin.svg" type="image/svg+xml" id="units_buy_coin"></object>
+              <span id="units_buy_cost" class="units_buy_gold buy_gold_<%= i %>"></span>
+            </div>
+            <p class="tooltip_trigger struggle_tooltip_trigger struggle_tooltip_trigger_dark" style="right:0;">i</p>
+            <div class="struggle_tooltip_container" style="right:0;">
+              <p class="struggle_tooltip_text">
+                <span  class="struggle_tooltip_title">Stats - <%= locals.units[i].name %>:</span>
+                <br/><br/>
+                Damage: <%= locals.units[i].damage %>
+                <br/>
+                Health: <%= locals.units[i].health %>
+                <br/>
+                Movement Speed: <%= locals.units[i].moveSpeed %>
+                <br/>
+                Attack Range: <%= locals.units[i].attackRange %>
+                <% if(locals.units[i].buffDesc) { %>
+                  <br/><br/>
+                  Bonus: <b><%= locals.units[i].buffDesc %></b>
+                <% } %>
+                <br/><br/>
+                <span id="units_tooltip_cost">Cost: </span>
+                <object data="/images/struggle/bronze_coin.svg" type="image/svg+xml" id="units_tooltip_coin"></object>
+                <span id="units_tooltip_cost" class="units_buy_bronze buy_bronze_<%= i %>"></span>
+                <object data="/images/struggle/silver_coin.svg" type="image/svg+xml" id="units_tooltip_coin"></object>
+                <span id="units_tooltip_cost" class="units_buy_silver buy_silver_<%= i %>"></span>
+                <object data="/images/struggle/gold_coin.svg" type="image/svg+xml" id="units_tooltip_coin"></object>
+                <span id="units_tooltip_cost" class="units_buy_gold buy_gold_<%= i %>"></span>
+              </p>
+            </div>
+            <div class="standard_button" id="units_buy_button" unit="<%= i %>">Buy x <span id="units_buy_amount">1</span></div>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+    <div id="units_toggle_button"></div>
+  </div>
+</div>
+
+<div id="raid_confirm_container">
+  <div id="raid_confirm_sub_container">
+    <img id="raid_confirm_img" src="/images/header/alert.png" alt="">
+    <p id="raid_confirm_title"></p>
+    <p id="raid_confirm_text"></p>
+    <button class="standard_button" id="raid_confirm_yes">Yes</button>
+    <button class="standard_button" id="raid_confirm_no">Cancel</button>
+  </div>
+</div>
+
+<div id="raid_results_container">
+  <div id="raid_results_sub_container">
+    <img id="raid_results_img" src="/images/header/alert.png" alt="">
+    <p id="raid_results_title">
+      <b id="raid_results_title_text"></b><br/>
+      <span id="raid_results_title_winner" style="font-size:20px;"></span><br/>
+    </p>
+    <div id="raid_results_text">
+      <b>Raid Overview: <span id="raid_results_raid_no"></span></b><br/>
+      <span style="font-size:14px;">Round: <span id="raid_results_round"></span></span>
+      <div id="raid_results_lineup_grid_container"></div>
+      vs
+      <div id="raid_results_lineup_grid_container"></div>
+    </div>
+    <div class="raid_results_nav_prev" id="raid_results_nav" direction="prev"></div>
+    <div class="raid_results_nav_next" id="raid_results_nav" direction="next"></div>
+    <div class="raid_results_nav_raids_next" id="raid_results_nav_raids" direction="next">Next</div>
+    <div id="raid_results_close">Close</div>
+
+    <div id="raid_results_lost_soldiers_container" class="raid_results_lost_container">
+      <p id="raid_results_lost_soldiers_title" class="raid_results_lost_title">Lost Soldiers</p>
+    </div>
+    <div id="raid_results_lost_workers_container" class="raid_results_lost_container">
+      <p id="raid_results_lost_workers_title" class="raid_results_lost_title"></p>
+    </div>
+
+    <div id="raid_results_coin_flip_container">
+      <p id="raid_results_coin_flip_text"></p>
+    </div>
+  </div>
+</div>
+
+<div id="details_input_container">
+  <div id="details_input_sub_container">
+    <img id="details_input_img" src="/images/title/document.png" alt="">
+    <p id="details_input_title">Input Details</p>
+    <div id="spacer"></div>
+    <p id="username_text">Showing as:</p>
+    <% if(locals.authenticator(locals.user, 5)) { %>
+      <input id="username" class="form_input" type="text" name="username" value="<%= locals.user.username %>" disabled>
+    <% }; %>
+    <input id="villageName" class="form_input input" type="text" name="villageName" placeholder="Village Name">
+  	<p id="username_error" class="error_text"></p>
+    <p id="details_input_text"><b>Note:</b><br/>You can edit these details at any time.</p>
+    <div id="spacer"></div>
+    <div class="standard_button" id="details_input_submit">Submit</div>
+    <p id="details_input_close">Close</p>
+  </div>
+</div>
+
+<div id="first_time_container">
+  <p id="first_time_title" class="first_time_text"></p>
+  <p id="first_time_text1" class="first_time_text"></p>
+  <p id="first_time_text2" class="first_time_text"></p>
+  <p id="first_time_counter" class="first_time_text"></p>
+</div>
+
+<% include ../../partials/footer %>

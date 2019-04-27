@@ -1,0 +1,28 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/servers/servers_index.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/servers/servers_index.css">
+
+<title>Servers</title>
+
+<div id="main_container">
+
+  <div id="main_title_container">
+    <img src="/images/title/game.png" id="main_title_img">
+    <p id="main_title">Lykos Servers</p>
+  </div>
+
+  
+  <div id="server_status_container" class="arma3">
+    <img id="server_status_refresh" onclick="queryServer('arma3');" src="/images/loading/refresh.png">
+    <p id="server_status_title">Arma III Server</p>
+    <p id="server_status_address">Needs Address</p>
+    <div id="server_status_spacer"></div>
+    <p id="server_status_state"></p>
+    <p id="server_status_extra"></p>
+    <img id="server_status_refreshing" src="/images/loading/refreshing.png">
+  </div>
+
+</div>
+
+<% include ../../partials/footer %>

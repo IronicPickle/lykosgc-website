@@ -1,0 +1,27 @@
+[
+  {
+    "team": "a",
+    "slot": 1
+  }, {
+    "team": "b",
+    "slot": 1
+  }, {
+    "team": "b",
+    "slot": 2
+  }, {
+    "team": "a",
+    "slot": 2
+  }, {
+    "team": "a",
+    "slot": 3
+  }, {
+    "team": "b",
+    "slot": 3
+  }, {
+    "team": "b",
+    "slot": 4
+  }, {
+    "team": "a",
+    "slot": 4
+  }
+]

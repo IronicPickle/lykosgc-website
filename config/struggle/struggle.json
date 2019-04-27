@@ -1,0 +1,13 @@
+{
+  "main": {
+    "templateGroup": 691
+  },
+  "default": {
+    "grace": 1
+  },
+  "raid": {
+    "maxGrace": 48,
+    "flipEvaluator": 0.5,
+    "speedOverride": null
+  }
+}
