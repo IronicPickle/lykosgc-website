@@ -97,6 +97,13 @@ function spinResetIntervals() {
       if(rpm > 150) $("#click_coin_notes").html("RPM: "+rpm+"<br>You just don't stop!<br>Coin Multiplier: " + rpmMulti);
       if(rpm > 250) $("#click_coin_notes").html("RPM: "+rpm+"<br>Ok, calm down...<br>Coin Multiplier: " + rpmMulti);
       if(rpm > 500) $("#click_coin_notes").html("RPM: "+rpm+"<br>Now this is just absurd!<br>Coin Multiplier: " + rpmMulti);
+      if(rpm > 1000) $("#click_coin_notes").html("RPM: "+rpm+"<br>This is the part where you stop.<br>Coin Multiplier: " + rpmMulti);
+      if(rpm > 2000) $("#click_coin_notes").html("RPM: "+rpm+"<br>You really gotta stop dude.!<br>Coin Multiplier: " + rpmMulti);
+      if(rpm > 3000) $("#click_coin_notes").html("RPM: "+rpm+"<br>You know this doesn't get you anything right?<br>Coin Multiplier: " + rpmMulti);
+      if(rpm > 4000) $("#click_coin_notes").html("RPM: "+rpm+"<br>Do you want a medal or something?<br>Coin Multiplier: " + rpmMulti);
+      if(rpm > 4100) $("#click_coin_notes").html("RPM: "+rpm+"<br>If I give you a medal will you stop?<br>Coin Multiplier: " + rpmMulti);
+      if(rpm > 5000) $("#click_coin_notes").html("RPM: "+rpm+"<br>Here's a medal, now please leave.<br>Coin Multiplier: " + rpmMulti);
+      if(rpm > 10000) $("#click_coin_notes").html("RPM: "+rpm+"<br>Why are you still here?<br>Coin Multiplier: " + rpmMulti);
     } else {
       if(rpm == 0) $("#click_coin_notes").html("RPM: "+rpm+"<br>Click the wheel!<br>Coin Multiplier: " + rpmMulti);
       if(rpm > 0) $("#click_coin_notes").html("RPM: "+rpm+"<br>Spinning down...<br>Coin Multiplier: " + rpmMulti);
