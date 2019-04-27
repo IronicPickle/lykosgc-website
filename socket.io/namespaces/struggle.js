@@ -545,16 +545,19 @@ exports = module.exports = function(app, io, next) {
                                 if(results.totalHealth.offense > results.totalHealth.defence) { // Checks if defender lost
                                   // Networth calculation
                                   var netWorth = target.money + 1;
-                                  for(var i in targetSoldiers) {
-                                    var amount = targetSoldiers[i].amount,
+                                  for(var i in target.soldiers) {
+                                    var amount = target.soldiers[i].amount,
                                         cost = unitsJSON[i].cost,
                                         totalValue = amount * cost;
                                     netWorth = netWorth + totalValue;
                                   }
-                                  for(var i in results.newWorkers.defence) {
-                                    var amount = results.newWorkers.defence[i].amount,
+                                  for(var i in target.workers) {
+                                    var amount = target.workers[i].amount,
                                         cost = unitsJSON[i].cost,
-                                        totalValue = amount * cost;
+                                        totalValue = 0;
+                                    for(var ii = 0; ii < amount; ii++) {
+                                      totalValue = totalValue + (cost*(Math.pow(1.1, (ii))));
+                                    }
                                     netWorth = netWorth + totalValue; // Total networth
                                   }
                                   // Grace period calculation

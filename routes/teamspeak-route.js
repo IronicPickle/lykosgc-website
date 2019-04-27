@@ -39,13 +39,29 @@ router.get("/struggle/info", csrfProtection, function(req, res, next) {
     for(var i in villages) {
       usersArray[i] = villages[i].userID;
       var timePassed = (new Date().getTime() - new Date(villages[i].lastVisit).getTime())/1000,
+          netWorth = villages[i].money,
+          soldiers = villages[i].soldiers,
           workers = villages[i].workers,
           totalCPS = 0;
+      for(var ii in soldiers) {
+        var amount = soldiers[ii].amount,
+            cost = unitsJSON[ii].cost,
+            totalValue = amount * cost;
+        netWorth = netWorth + totalValue;
+      }
       for(var ii in workers) {
-        totalCPS = totalCPS + (unitsJSON[ii].cps * workers[ii].amount);
+        totalCPS = totalCPS + (unitsJSON[ii].cps * workers[ii].amount); // Calculates total CPS
+        // Calculates networth
+        var amount = workers[ii].amount,
+            cost = unitsJSON[ii].cost,
+            totalValue = 0;
+        for(var iii = 0; iii < amount; iii++) {
+          totalValue = totalValue + (cost*(Math.pow(1.1, (iii))));
+        }
+        netWorth = netWorth + totalValue; // Total networth
       }
       var moneyEarned = totalCPS * timePassed,
-          newMoney = villages[i].money + moneyEarned;
+          newMoney = netWorth + moneyEarned;
       villages[i].money = newMoney;
     }
     Users.find({_id: {$in:usersArray}}, "username").exec().then(function(users) {
