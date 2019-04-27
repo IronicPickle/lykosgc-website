@@ -1,7 +1,7 @@
 {
   "main": {
     "port": 8080,
-    "debug": true,
+    "debug": false,
     "log": true,
     "logPath": "/logs",
     "logAppend": true
