@@ -72,17 +72,17 @@ router.get("/struggle/info", csrfProtection, function(req, res, next) {
           }
         }
       }
-      // Villages array sort ~ Sorts by money in ascending order
+      // Villages array sort ~ Sorts by money in descending order
       var sorted = [];
       for(var i in villages) { // Cycles through villages
         if(i == 0) {
           sorted[0] = villages[0];
         } else {
           for(var ii in sorted) { // Tests current village against sorted array
-            if(villages[i].money <= sorted[ii].money) { // Less than
+            if(villages[i].money > sorted[ii].money) { // Greater than
               sorted.splice(ii, 0, villages[i]);
               break;
-            } else if((parseInt(ii) + 1) == sorted.length) { // Greater than
+            } else if((parseInt(ii) + 1) == sorted.length) { // Less than
               sorted.push(villages[i]);
             }
           }
