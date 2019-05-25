@@ -1,0 +1,57 @@
+<% include ../../partials/header %>
+
+<script src="/js/pages/teamspeak/botsync.js"></script>
+<script src="/js/pages/teamspeak/botsync_socket.js"></script>
+<script src="/lib/socket.io-client/dist/socket.io.js"></script>
+<script id="_scriptVars"></script>
+<link rel="stylesheet" type="text/css" href="/css/pages/teamspeak/botsync.css">
+
+<title>TS Bot Sync</title>
+
+<div id="main_container">
+
+  <div id="player"></div>
+
+  <div id="main_title_container" class="ui_element">
+    <svg id="track_state_img"></svg>
+    <svg id="track_skip_img"></svg>
+    <svg id="track_volume_img"></svg>
+    <div id="volume_bar_outer" class="volume_bar">
+      <div id="volume_bar_inner" class="volume_bar">
+
+      </div>
+    </div>
+    <p id="track_title"></p>
+    <p id="track_position"></p>
+  </div>
+
+  <div id="left_wrapper">
+    <div id="queue_container" class="ui_element">
+      <p id="queue_title">Queue</p>
+    </div>
+  </div>
+
+  <div id="right_wrapper">
+    <div id="instances_container" class="ui_element">
+      <p id="instances_title">Instances</p>
+
+    </div>
+
+    <div id="submit_url_container" class="ui_element">
+      <p id="submit_url_title">Submit a Link</p>
+      <input type="text" id="submit_url_link" class="form_input"/>
+      <div id="submit_url_buttons_container">
+        <div class="standard_button" id="submit_url_queue">Queue</div>
+        <div class="standard_button" id="submit_url_play">Play</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="seek_bar_outer" class="seek_bar">
+    <div id="seek_bar_inner" class="seek_bar">
+
+    </div>
+  </div>
+</div>
+
+<% include ../../partials/footer %>

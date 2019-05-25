@@ -107,6 +107,8 @@ module.exports = {
   authenticator: function(user, power) {
     if(!user) { // Checks if user is logged in
       return false;
+    } if(!user.groups) { // Checks if user is logged in
+      return false;
     }
     // Library requires
     var prefix = require("./prefix"),

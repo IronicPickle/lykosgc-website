@@ -198,7 +198,7 @@
   margin: 10px auto;
 }
 
-/* Sync open container */
+/* Struggle container */
 #struggle_container {
   position: relative;
   margin: 10px 0 0 0;
@@ -231,6 +231,45 @@
   text-align: center;
 }
 #struggle_button {
+  position: relative;
+  left: 0;
+  width: 70px;
+  margin: 10px auto;
+}
+
+/* TS Bot Sync container */
+#botsync_container {
+  position: relative;
+  margin: 10px 0 0 0;
+  padding: 0;
+  background-color: rgba(25,34,49,1);
+  border-color: rgba(15,24,39,1);
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  border-style: solid;
+  border-width: 1px;
+}
+#botsync_title {
+  position: relative;
+  margin: 10px;
+  padding: 0 0 5px 0;
+  border-style: none none solid none;
+  border-width: 1px;
+  border-color: rgba(255,255,255,1);
+  font-family: "Arial", sans-serif;
+  font-size: 18px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+}
+#botsync_text {
+  position: relative;
+  margin: 10px 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,1);
+  text-align: center;
+}
+#botsync_button {
   position: relative;
   left: 0;
   width: 70px;

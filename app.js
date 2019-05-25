@@ -83,26 +83,45 @@ app.get("*", function(req, res, next){
 
 // Socket.IO
 var io = require("socket.io")(http);
-io.use(passportSocketIo.authorize({
-  key: "connect.sid",
-  secret: globalConfig.keys.session,
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  passport: passport,
-  cookieParser: cookieParser,
-  fail: onAuthorizeFail
-}));
-
-function onAuthorizeFail(data, message, error, accept) {
-  tools.log("socketIO", "\x1b[91mSocket not authorized.", socketConfig.main);
+function authSuccess(data, accept) {
+  tools.log("socketIO", "\x1b[92mSocket authorised.", socketConfig.main);
+  accept(null, true);
+}
+function authFail(data, message, error, accept) {
+  if(error) {
+    tools.log("socketIO", message, socketConfig.main, null, true);
+  }
+  tools.log("socketIO", "\x1b[91mSocket not authorised.", socketConfig.main);
+}
+function authAnyway(data, message, error, accept) {
+  if(error) {
+    tools.log("socketIO", message, socketConfig.main, null, true);
+  }
+  tools.log("socketIO", "\x1b[92mSocket not authorised, accepting anyway.", socketConfig.main);
+  accept(null, true);
+}
+function socketAuth(force) {
+  return passportSocketIo.authorize({
+    key: "connect.sid",
+    secret: globalConfig.keys.session,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    passport: passport,
+    cookieParser: cookieParser,
+    success: authSuccess,
+    fail: (force) ? authAnyway : authFail
+  })
 }
 
 // Namespaces
-var sync = io.of("/sync");
+var sync = io.of("/sync").use(socketAuth(false));
 app.sync = sync;
 require("./socket.io/namespaces/sync.js")(app, sync);
-var struggle = io.of("/struggle");
+var struggle = io.of("/struggle").use(socketAuth(false));
 app.struggle = struggle;
 require("./socket.io/namespaces/struggle.js")(app, struggle);
+var botSync = io.of("/botSync").use(socketAuth(true));
+app.botSync = botSync;
+require("./socket.io/namespaces/botsync.js")(app, botSync);
 
 var logStr = `Routing`;
 console.log(logStr); // Setup
@@ -134,7 +153,7 @@ app.use("/forum_backend", forum_backend);
 // Other Routes
 var servers = require("./routes/servers-route");
 app.use("/servers", servers);
-var teamspeak = require("./routes/teamspeak-route");
+var teamspeak = require("./routes/teamspeak-route")(botSync);
 app.use("/teamspeak", teamspeak);
 // Index route
 var index = require("./routes/index-route");

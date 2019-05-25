@@ -7,8 +7,8 @@ $(window).on("load", function () {
 // Hide footer
 function toggleFooter(state) {
   if(state) {
-    $("#bottom_container").show();
+    $("#bottom_container").fadeIn(200, "swing");
   } else {
-    $("#bottom_container").hide();
+    $("#bottom_container").fadeOut(200, "swing");
   }
 }
