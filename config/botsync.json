@@ -1,0 +1,14 @@
+{
+  "main": {
+    "botConnect": {
+      "address": "54.37.74.38",
+      "port": "8087",
+      "password": "$2y$12$pd.ogelrj8m3fLgEd6VNh.s8Z3lTHELxbfPKC9naUEf21USzaLrem"
+    },
+    "botLogin": {
+      "username": "admin",
+      "password": "8592c5c79d96ffd8ac9fc8086f10af65",
+      "botId": "dc665715-c168-40dc-87d9-c315ffe9b3a2"
+    }
+  }
+}
