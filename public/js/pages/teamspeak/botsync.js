@@ -242,7 +242,7 @@ function updateMeta(socket, data) {
 }
 // Syncs player
 function syncPlayer(socket, data) {
-  var ping = new Date() - new Date(data.sent) - 1500,
+  var ping = new Date() - new Date(data.sent) - 3500,
       playerTime = player.getCurrentTime() * 1000,
       correctTime = data.currentTrack.position + ping,
       offset = playerTime - correctTime;
