@@ -33,7 +33,7 @@ function socketSetup(socket, _csrf) {
     toggleNotification(false);
   });
   socket.on("instanceUpdatePending", function(data) {
-    socket.emit("getInstanceUpdate", JSON.stringify({playerOffset: -1000, type: data.type}));
+    socket.emit("getInstanceUpdate", JSON.stringify({playerOffset: 1500, type: data.type}));
   });
   socket.on("instanceUpdate", function(data) {
     try {
