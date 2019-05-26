@@ -94,8 +94,9 @@ exports = module.exports = function(app, botSync, next) {
           socket.emit("unauthorised", {route: "togglePower", required: "regular"});
           return;
         }
-        var uuid = socket.rooms[Object.keys(socket.rooms)[0]];
-        tools.HTTPRequest(botsyncConfig.main.botConnect.address, botsyncConfig.main.botConnect.port, "/api/v1/b/"+botID+"/i/"+uuid+"/event/toggleTrack", "POST", {"Content-Type": "application/json"}, JSON.stringify({password: botsyncConfig.main.botConnect.password}), function(data) {
+        var uuid = socket.rooms[Object.keys(socket.rooms)[0]],
+            data = {username: socket.username};
+        tools.HTTPRequest(botsyncConfig.main.botConnect.address, botsyncConfig.main.botConnect.port, "/api/v1/b/"+botID+"/i/"+uuid+"/event/toggleTrack", "POST", {"Content-Type": "application/json"}, JSON.stringify({data: data, password: botsyncConfig.main.botConnect.password}), function(data) {
 
         });
       });
