@@ -43,7 +43,8 @@ function socketSetup(socket, _csrf) {
     }
     instanceData.playerOffset = data.playerOffset;
     instanceData.type = data.type;
-    instanceData.sent = data.sent;
+    var ping = (new Date() - new Date(data.sent)) / 2;
+    instanceData.sent = new Date(data.sent) - ping;
     for(var i in seekBarIntervals) {
       clearInterval(seekBarIntervals[i]);
     }
