@@ -1,7 +1,7 @@
 {
   "main": {
     "botConnect": {
-      "address": "54.37.74.38",
+      "address": "localhost",
       "port": "8087",
       "password": "$2y$12$pd.ogelrj8m3fLgEd6VNh.s8Z3lTHELxbfPKC9naUEf21USzaLrem"
     },
