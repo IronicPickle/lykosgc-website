@@ -33,7 +33,7 @@ function socketSetup(socket, _csrf) {
     toggleNotification(false);
   });
   socket.on("instanceUpdatePending", function(data) {
-    socket.emit("getInstanceUpdate", JSON.stringify({playerOffset: 1500, type: data.type}));
+    socket.emit("getInstanceUpdate", JSON.stringify({playerOffset: 1500, type: data.type, sent: new Date()}));
   });
   socket.on("instanceUpdate", function(data) {
     try {
@@ -43,6 +43,7 @@ function socketSetup(socket, _csrf) {
     }
     instanceData.playerOffset = data.playerOffset;
     instanceData.type = data.type;
+    instanceData.sent = data.sent;
     for(var i in seekBarIntervals) {
       clearInterval(seekBarIntervals[i]);
     }

@@ -254,7 +254,7 @@ function syncPlayer(socket, data) {
     if(offset < -50) data.playerOffset += 25;
     if(offset > 100) data.playerOffset -= 50;
     if(offset < -100) data.playerOffset += 50;
-    socket.emit("getInstanceUpdate", JSON.stringify({playerOffset: data.playerOffset, type: "resync"}));
+    socket.emit("getInstanceUpdate", JSON.stringify({playerOffset: data.playerOffset, type: "resync", sent: new Date()}));
     toggleNotification(true, "loader", "Attempting to sync player...");
     toggleUIEvents(false);
     stopSyncChecker();

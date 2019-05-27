@@ -58,9 +58,10 @@ exports = module.exports = function(app, botSync, next) {
         }
         var uuid = socket.rooms[Object.keys(socket.rooms)[0]],
             playerOffset = (!data) ? 0 : data.playerOffset;
-            type = (!data) ? 0 : data.type;
+            type = (!data) ? 0 : data.type,
+            sent = (!data) ? 0 : data.sent;
         tools.HTTPRequest(botsyncConfig.main.botConnect.address, botsyncConfig.main.botConnect.port, "/api/v1/b/"+botID+"/i/"+uuid+"/event/getInstanceUpdate", "POST", {"Content-Type": "application/json"}, JSON.stringify({password: botsyncConfig.main.botConnect.password}), function(data) {
-          socket.emit("instanceUpdate", {instanceData: data, playerOffset: playerOffset, type: type});
+          socket.emit("instanceUpdate", {instanceData: data, playerOffset: playerOffset, type: type, sent: sent});
         });
       });
       socket.on("selectInstance", function(data) {
