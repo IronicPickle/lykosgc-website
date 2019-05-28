@@ -223,6 +223,7 @@
 #instances_row_power {
   cursor: pointer;
   margin-left: 3px;
+  z-index: 1;
 }
 #instances_row_text {
   position: absolute;
