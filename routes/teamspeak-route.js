@@ -26,14 +26,14 @@ module.exports = function(botSync) {
   });
   // GET - TS Struggle page
   router.get("/struggle", csrfProtection, function(req, res, next){
-    /*res.status(200).send("Struggle has been closed. Will be re-released soon^tm.");
-    return;*/
-    res.render("pages/teamspeak/struggle", {
+    res.status(200).send("Struggle has been closed.");
+    return;
+    /*res.render("pages/teamspeak/struggle", {
       units: unitsJSON,
 
       authenticator: tools.authenticator,
       _csrf: req.csrfToken()
-    });
+    });*/
   });
   // GET - TS Struggle leaderboard
   router.get("/struggle/info", csrfProtection, function(req, res, next) {
