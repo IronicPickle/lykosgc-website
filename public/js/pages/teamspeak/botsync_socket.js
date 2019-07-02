@@ -17,10 +17,6 @@ function socketSetup(socket, _csrf) {
   socket.on("error", function(data) {
     toggleNotification(true, "alert", "Unexpected error", 5000);
   });
-  socket.on("parseError", function(data) {
-    toggleNotification(true, "alert", "Botsync is unavailable right now, please try again later.");
-    toggleUI(false);
-  });
   socket.on("unauthorised", function(data) {
     toggleNotification(true, "alert", "You must be a " + data.required + " to do that.", 2000);
   });
