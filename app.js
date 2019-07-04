@@ -19,7 +19,6 @@ var express = require("express"),
     passportSocketIo = require("passport.socketio"),
     cookieParser = require("cookie-parser"),
     csrf = require("csurf"),
-    csrfProtection = csrf({ cookie: false }),
     fs = require("fs"),
     // Custom libraries
     tools = require("./utility_lib/tools"),
